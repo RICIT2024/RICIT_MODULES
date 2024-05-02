@@ -1,0 +1,12 @@
+{
+    "id": "usermessage",
+    "name": "usermessage",
+    "description": "A form module for collecting user input.",
+    "keywords": [
+    ],
+    "version": "0.4",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": ["assets/screen1.jpg"]
+}
