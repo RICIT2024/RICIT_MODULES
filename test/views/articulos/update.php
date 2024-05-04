@@ -10,7 +10,7 @@ $hum_uid = $articulo->getId();
 
 $this->title = 'Update Articulos: ' . $model->Articulos_id;
 $type = "Articulo";
-$action ="Update";
+$action ="Actualizar";
 $folder ="articulos";
 ?>
 

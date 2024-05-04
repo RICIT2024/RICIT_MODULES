@@ -10,7 +10,7 @@ $this->title = $model->Titulo;
 
 $this->params['breadcrumbs'][] = $this->title;
 $type = "Articulo";
-$action ="View";
+$action ="Ver";
 $folder ="articulos";
 
 \yii\web\YiiAsset::register($this);
@@ -28,8 +28,8 @@ $folder ="articulos";
     </h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'Articulos_id' => $model->Articulos_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'Articulos_id' => $model->Articulos_id], [
+        <?= Html::a('Actualizar', ['update', 'Articulos_id' => $model->Articulos_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'Articulos_id' => $model->Articulos_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Seguro que deseas eliminar el registro?',

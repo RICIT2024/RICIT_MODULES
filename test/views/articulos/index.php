@@ -22,7 +22,7 @@ $this->title = 'Articulos';
         </h1>
         
         <p>
-            <?= Html::a('Create Articulos', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
