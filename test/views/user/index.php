@@ -7,7 +7,7 @@
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?= Yii::t('UserModule.profile', '<strong>Scientific Producction</strong> By User') ?>
+        <?= Yii::t('UserModule.profile', '<strong>Producción Cientifica del Usuario</strong>') ?>
     </div>
 
 <?php   
@@ -48,7 +48,7 @@ use yii\grid\ActionColumn;
             'attribute' => 'Tipo',
             'headerOptions'=>[ 'style'=>'background-color:#BC955C; width:8%; text-align: center;' ]
          ],
-         [
+         [  //en producción, deberia redireccionar a la pagina del identificador, ej. Libros. 
             'class' => ActionColumn::class,
             'template' => '{view}',
             'urlCreator' => function ($action, ScientificProduction $model) {

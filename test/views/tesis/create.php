@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Tesis $model */
 
-$this->title = 'Create Tesis';
+$this->title = 'Registrar Tesis';
 $hum_uid=Yii::$app->user->getId(); 
 
 $type = "Tesis";
-$action ="Create";
+$action ="Registrar";
 $folder ="tesis";
 
 ?>

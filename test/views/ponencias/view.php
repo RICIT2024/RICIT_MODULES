@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->Ponencia_id;
 $type = "Ponencias";
-$action ="View";
+$action ="Ver";
 $folder ="ponencias";
 
 \yii\web\YiiAsset::register($this);
@@ -26,8 +26,8 @@ $folder ="ponencias";
     </h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'Ponencia_id' => $model->Ponencia_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'Ponencia_id' => $model->Ponencia_id], [
+        <?= Html::a('Actualizar', ['update', 'Ponencia_id' => $model->Ponencia_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'Ponencia_id' => $model->Ponencia_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Seguro que deseas eliminar el registro?',

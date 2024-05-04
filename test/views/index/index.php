@@ -14,10 +14,11 @@ $hum_uid=Yii::$app->user->getId();
 
 ?>
 
-<div class="panel-heading"><strong>Test</strong> <?= Yii::t('TestModule.base', 'overview') ?></div>
+<div class="panel-heading"><strong>Producción Cientifica</strong> <?= Yii::t('TestModule.base', 'overview') ?></div>
 
 <div class="container-fluid">
     <!--Capitulo de Libro-->
+    <h2 style="text-align:center;">LIBROS</h2>
     <?= GridView::widget([
         'dataProvider' => $combinedDataProvider['dataProvider1'],
         'filterModel' => $combinedSearch['searchModel1'], // Assuming this is your search model
@@ -37,6 +38,8 @@ $hum_uid=Yii::$app->user->getId();
                     //'URL:url',
                 ],
     ]); ?>
+
+    <br>
 
     <!--Articulo-->
     <?= GridView::widget([
@@ -80,6 +83,8 @@ $hum_uid=Yii::$app->user->getId();
                 ],
     ]); ?>
 
+    <br>
+
     <!--Libro-->
     <?= GridView::widget([
         'dataProvider' => $combinedDataProvider['dataProvider3'],
@@ -121,6 +126,8 @@ $hum_uid=Yii::$app->user->getId();
                 // Add other columns with centered headers as needed
                 ],
     ]); ?>
+
+    <br>
 
     <!--Ponencia-->
     <?= GridView::widget([

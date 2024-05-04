@@ -10,7 +10,7 @@ $this->title = $model->Cap_id;
 $this->params['breadcrumbs'][] = $this->title;
 
 $type = "Capitulos";
-$action ="View";
+$action ="Ver";
 $folder ="capitulos";
 
 \yii\web\YiiAsset::register($this);
@@ -28,8 +28,8 @@ $folder ="capitulos";
     </h1>
     
     <p>
-        <?= Html::a('Update', ['update', 'Cap_id' => $model->Cap_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'Cap_id' => $model->Cap_id], [
+        <?= Html::a('Actualizar', ['update', 'Cap_id' => $model->Cap_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'Cap_id' => $model->Cap_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Seguro que deseas eliminar el registro?',

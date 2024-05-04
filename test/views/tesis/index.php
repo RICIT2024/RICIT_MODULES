@@ -21,7 +21,7 @@ $this->title = 'Tesis';
     </h1>
     
     <p>
-        <?= Html::a('Create Tesis', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

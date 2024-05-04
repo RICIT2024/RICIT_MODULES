@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Libros: ' . $model->Libro_id;
 $type = "Capitulos";
-$action ="Update";
+$action ="Actualizar";
 $folder ="capitulos";
 ?>
 <div class="libros-update">

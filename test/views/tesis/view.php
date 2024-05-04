@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->Tesis_id;
 
 $type = "Tesis";
-$action ="View";
+$action ="Ver";
 $folder ="tesis";
 
 \yii\web\YiiAsset::register($this);
