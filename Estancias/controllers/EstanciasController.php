@@ -8,8 +8,6 @@ use yii\web\NotFoundHttpException;
 
 use ricit\humhub\modules\Estancias\models\EstanciasInvestigacion;
 use ricit\humhub\modules\Estancias\models\SearchEI;
-
-
 use humhub\modules\user\components\BaseAccountController;
 use yii\web\User;
 

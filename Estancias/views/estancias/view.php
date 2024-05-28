@@ -2,35 +2,25 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\db\Query;
 
 /** @var yii\web\View $this */
 /** @var app\models\EstanciasInvestigacion $model */
-
-$this->title = $model->Estancia_id;
-$type = "Estancia";
-$action ="View";
-$folder ="estancias";
 
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="estancias-investigacion-view">
 
-    <?= $this->render('@Estancias/views/layouts/nav', [
-        'type' => $type,
-        'action' => $action,
-        'folder'=> $folder,
-    ]) ?>
-
-    <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
-        <?= Html::encode($this->title) ?>
-    </h1>
+    <p>
+        <?= Html::a('<i class="fa fa-arrow-left" style="color: #FFFFFF;"></i>', ['index'], ['class' => 'btn btn-default', 'style' => 'background-color: #691C32; color: #FFFFFF;']) ?>    
+    </p>
 
     <p>
-        <?= Html::a('Update', ['update', 'Estancia_id' => $model->Estancia_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'Estancia_id' => $model->Estancia_id], [
+        <?= Html::a('Actualizar', ['update', 'Estancia_id' => $model->Estancia_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'Estancia_id' => $model->Estancia_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Estás seguro de eliminar esta estancia?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -40,7 +30,18 @@ $folder ="estancias";
         'model' => $model,
         'attributes' => [
             'Estancia_id',
-            'User_id',
+            [
+                'label' => 'Usuario',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Institucion',
             'Pais',
             'Periodo',

@@ -7,22 +7,7 @@ use yii\helpers\Url;
 
 class Events
 {
-      /**
-     * Define que realizar cuando el perfil de usuario este inicializado
-     *
-     * @param $event
-     */
-    public static function onProfileMenuInit($event)
-    {
-        if ($event->sender->user !== null && $event->sender->user->moduleManager->isEnabled('Estancias')) {
-            $event->sender->addItem([
-                'label' => Yii::t('EstanciasModule.base', 'Estancia'),
-                'url' => $event->sender->user->createUrl('/Estancias/user'),
-                'icon' => '<i class="fa fa-university"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'Estancias')
-            ]);
-        }  
-    }
+    
 
     /**
      * Define que realizar cuando la cuenta del usuario este inicializado

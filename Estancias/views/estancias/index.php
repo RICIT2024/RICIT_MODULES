@@ -4,32 +4,40 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\db\Query;
 
 /** @var yii\web\View $this */
 /** @var app\models\SearchEI $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Estancias Investigacions';
+$this->title = 'Estancias de Investigación';
 ?>
 <div class="estancias-investigacion-index">
-
-    <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
+    
+    <br><h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
         <?= Html::encode($this->title) ?>
     </h1>
     <p>
         <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    </p><br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'User_id',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
 
-            'Estancia_id',
-            'User_id',
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Institucion',
             'Pais',
             'Periodo',

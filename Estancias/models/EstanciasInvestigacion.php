@@ -3,6 +3,7 @@
 namespace ricit\humhub\modules\Estancias\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "estancias_investigacion".
@@ -13,7 +14,7 @@ use Yii;
  * @property string $Pais
  * @property string $Periodo
  */
-class EstanciasInvestigacion extends \yii\db\ActiveRecord
+class EstanciasInvestigacion extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -47,10 +48,10 @@ class EstanciasInvestigacion extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Estancia_id' => 'Estancia ID',
-            'User_id' => 'User ID',
-            'Institucion' => 'Institucion',
-            'Pais' => 'Pais',
+            'Estancia_id' => 'ID Estancia',
+            'User_id' => 'Usuario',
+            'Institucion' => 'Institución',
+            'Pais' => 'País',
             'Periodo' => 'Periodo',
         ];
     }

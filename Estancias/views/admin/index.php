@@ -5,22 +5,19 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\db\Query;
 
 /** @var yii\web\View $this */
 /** @var app\models\SearchEI $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Estancias Investigacions';
+$this->title = 'Estancias de Investigación';
 ?>
 <div class="container-fluid">
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Estancias</strong> <?= Yii::t('EstanciasModule.base', 'configuration') ?></div>
+        <div class="panel-heading"><strong>Estancias de Investigación</strong>
 
-        <div class="panel-body">
-            <p><?= Yii::t('EstanciasModule.base', 'Welcome to the admin only area.') ?></p>
-        </div>
-
-        <p>
+        <p><br>
             <?= Html::a("Editar", Url::to(["estancias" . '/index']), ['class' => ' btn btn-primary'])?>
         </p>
 
@@ -29,8 +26,18 @@ $this->title = 'Estancias Investigacions';
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'Estancia_id',
-            'User_id',
+            [
+                'attribute' => 'User_id',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Institucion',
             'Pais',
             'Periodo',

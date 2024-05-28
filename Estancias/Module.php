@@ -59,6 +59,6 @@ class Module extends ContentContainerModule
     */
     public function getContentContainerDescription(ContentContainerActiveRecord $container)
     {
-        return Yii::t('EstanciasModule.base', 'Registro de Estancias de Investigacion del Usuario');
+        return Yii::t('EstanciasModule.base', '');
     }
 }
