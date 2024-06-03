@@ -16,9 +16,9 @@ class Events
     {
         if ($event->sender->user !== null && $event->sender->user->moduleManager->isEnabled('Estancias')) {
             $event->sender->addItem([
-                'label' => Yii::t('RecursosHumanosModule.base', 'Recursos Humanos'),
+                'label' => Yii::t('RecursosHumanosModule.base', 'Formación de Recursos Humanos'),
                 'url' => $event->sender->user->createUrl('/RecursosHumanos/user'),
-                'icon' => '<i class="fa fa-pencil"></i>',
+                'icon' => '<i class="fa fa-graduation-cap"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'RecursosHumanos')
             ]);
         }  
@@ -32,9 +32,9 @@ class Events
     public static function onAccountMenuInit($event)
     {
             $event->sender->addItem([
-                'label' => Yii::t('RecursosHumanosModule.base', 'Recursos Humanos'),
+                'label' => Yii::t('RecursosHumanosModule.base', 'Formación de Recursos Humanos'),
                 'url' => Url::to(['/RecursosHumanos/docencia']),
-                'icon' => '<i class="fa fa-pencil"></i>',
+                'icon' => '<i class="fa fa-graduation-cap"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'RecursosHumanos' && Yii::$app->controller->id == 'docencia'),
                 'sortOrder' => 135,
             ]);
@@ -48,10 +48,10 @@ class Events
     public static function onAdminMenuInit($event)
     {
         $event->sender->addItem([
-            'label' => 'Recursos Humanos',
+            'label' => ' Formación de Recursos Humanos',
             'url' => Url::to(['/RecursosHumanos/admin']),
             'group' => 'manage',
-            'icon' => '<i class="fa fa-pencil"></i>',
+            'icon' => '<i class="fa fa-graduation-cap"></i>',
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'RecursosHumanos' && Yii::$app->controller->id == 'admin'),
             'sortOrder' => 99999,
         ]);
