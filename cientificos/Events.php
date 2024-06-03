@@ -18,7 +18,7 @@ class Events
             $event->sender->addItem([
                 'label' => Yii::t('CientificosModule.base', 'Eventos Científicos'), //cambiar nombre del módulo
                 'url' => $event->sender->user->createUrl('/cientificos/user'),
-                'icon' => '<i class="fa fa-newspaper-o"></i>',
+                'icon' => '<i class="fa fa-users"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'cientificos')
             ]);
         }  
@@ -34,7 +34,7 @@ class Events
             $event->sender->addItem([
                 'label' => Yii::t('CientificosModule.base', 'Eventos Científicos'), //cambiar nombre del módulo
                 'url' => Url::to(['/cientificos/cientificos']),
-                'icon' => '<i class="fa fa-newspaper-o"></i>',
+                'icon' => '<i class="fa fa-users"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'cientificos' && Yii::$app->controller->id == 'cientificos'),
                 'sortOrder' => 130,
             ]);
@@ -51,7 +51,7 @@ class Events
             'label' => 'Eventos Científicos',
             'url' => Url::to(['/cientificos/admin']),
             'group' => 'manage',
-            'icon' => '<i class="fa fa-newspaper-o"></i>',
+            'icon' => '<i class="fa fa-users"></i>',
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'cientificos' && Yii::$app->controller->id == 'admin'),
             'sortOrder' => 99999,
         ]);
