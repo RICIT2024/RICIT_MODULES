@@ -12,12 +12,20 @@ use yii\db\Query;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Formación de Recursos Humanos';
+
 ?>
 <div class="container-fluid">
+    
+    
 
     <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
         <?= Html::encode($this->title) ?>
     </h1>
+
+    <h2 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
+        Docencia
+    </h2>
+
     <p>
         <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
