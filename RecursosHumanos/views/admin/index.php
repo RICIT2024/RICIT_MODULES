@@ -18,6 +18,8 @@ $this->title = 'Formación de Recursos Humanos';
     <div class="panel panel-default">        
         <div class="panel-body">
         <div class="panel-heading"><strong>Formación de Recursos Humanos</strong> <br>
+        <div class="panel-heading"><strong>Docencia</strong> <br>
+
 
         <br><p>
             <?= Html::a("Editar", Url::to(["docencia" . '/index']), ['class' => ' btn btn-primary'])?>
