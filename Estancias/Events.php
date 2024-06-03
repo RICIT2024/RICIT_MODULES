@@ -17,7 +17,7 @@ class Events
     public static function onAccountMenuInit($event)
     {
             $event->sender->addItem([
-                'label' => Yii::t('EstanciasModule.base', 'Estancia'),
+                'label' => Yii::t('EstanciasModule.base', 'Estancias de Investigación'),
                 'url' => Url::to(['/Estancias/estancias']),
                 'icon' => '<i class="fa fa-university"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'Estancias' && Yii::$app->controller->id == 'estancias'),
@@ -33,7 +33,7 @@ class Events
     public static function onAdminMenuInit($event)
     {
         $event->sender->addItem([
-            'label' => 'Estancias',
+            'label' => 'Estancias de Investigación',
             'url' => Url::to(['/Estancias/admin']),
             'group' => 'manage',
             'icon' => '<i class="fa fa-university"></i>',
