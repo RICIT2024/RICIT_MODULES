@@ -13,13 +13,19 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="container-fluid">
-    <?= $form->field($model, 'User_id')->textInput(['value' => $hum_uid,'readonly' => true]) ?>
+        <?= $form->field($model, 'User_id')->textInput(['value' => $hum_uid, 'readonly' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-        <?= $form->field($model, 'Nombre_cert')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Nombre_cert')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-        <?= $form->field($model, 'Institución')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Institución')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-        <?= $form->field($model, 'Vigencia')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Vigencia')->textInput([
+            'maxlength' => true,
+            'style' => 'text-transform: uppercase;',
+            'placeholder' => 'AAAA',
+            'pattern' => '\d{4}',
+            'title' => 'Debe ser un año valido'
+        ]) ?>
     </div>
 
     <div class="form-group">
