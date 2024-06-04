@@ -57,4 +57,18 @@ class actividades extends ActiveRecord
     {
         return $this->hasOne(actividades::class, ['User_id' => 'User_id']);
     }
+
+     /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Dependencia = strtoupper($this->Dependencia);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
