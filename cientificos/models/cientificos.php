@@ -61,4 +61,21 @@ class cientificos extends ActiveRecord
     {
         return $this->hasOne(cientificos::class, ['User_id' => 'User_id']);
     }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Evento = strtoupper($this->Evento);
+            $this->Nombre = strtoupper($this->Nombre);
+            $this->Participación = strtoupper($this->Participación);
+            $this->Titulo = strtoupper($this->Titulo);
+            $this->Pais = strtoupper($this->Pais);
+
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
