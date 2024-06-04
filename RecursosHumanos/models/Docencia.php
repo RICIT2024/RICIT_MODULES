@@ -64,4 +64,24 @@ class Docencia extends ActiveRecord
             'Periodo' => 'Periodo',
         ];
     }
+
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Dependencia = strtoupper($this->Dependencia);
+            $this->Nivel_impartido = strtoupper($this->Nivel_impartido);
+            $this->Nombre_programa = strtoupper($this->Nombre_programa);
+            $this->Pais = strtoupper($this->Pais);
+            $this->Estado = strtoupper($this->Estado);
+            $this->Nombre_asignatura = strtoupper($this->Nombre_asignatura);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
