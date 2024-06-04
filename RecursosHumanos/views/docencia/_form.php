@@ -17,22 +17,27 @@ use yii\widgets\ActiveForm;
 
         <div class="row">
             <span class="col-md-6 col-sm-6">
-                <?= $form->field($model, 'Dependencia')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Dependencia')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Nivel_impartido')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Nivel_impartido')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Nombre_programa')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Nombre_programa')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
             </span>
 
             <span class="col-md-6 col-sm-6">
-                <?= $form->field($model, 'Pais')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Pais')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Estado')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Estado')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Nombre_asignatura')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Nombre_asignatura')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Periodo')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Periodo')->textInput([
+                    'maxlength' => true,
+                    'placeholder' => 'AAAA-AAAA',
+                    'pattern' => '\d{4}-\d{4}',
+                    'title' => 'Debe ser un periodo con el formato AAAA-AAAA'
+                ]) ?>
             </span>
         </div>
     
