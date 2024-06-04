@@ -55,4 +55,19 @@ class EstanciasInvestigacion extends ActiveRecord
             'Periodo' => 'Periodo',
         ];
     }
+
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Institucion = strtoupper($this->Institucion);
+            $this->Pais = strtoupper($this->Pais);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
