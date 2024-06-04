@@ -38,15 +38,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Evento')->dropDownList($eventoOptions, ['prompt' => 'Seleccione el tipo de evento']) ?>
 
-    <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
     <?= $form->field($model, 'Participación')->dropDownList($participacionOptions, ['prompt' => 'Seleccione el tipo de participación']) ?>
 
-    <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-    <?= $form->field($model, 'Anio')->textInput(['placeholder' => 'aaaa'])  ?>
+    <?= $form->field($model, 'Anio')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'AAAA',
+        'pattern' => '\d{4}',
+        'title' => 'Debe ser un año valido'
+        
+        ])  ?>
 
-    <?= $form->field($model, 'Pais')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Pais')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
