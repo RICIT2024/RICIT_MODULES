@@ -1,5 +1,4 @@
 <?php
-
 namespace ricit\humhub\modules\certifi\models;
 
 use Yii;
@@ -50,9 +49,26 @@ class Certifi extends ActiveRecord
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
-{
-    return $this->hasOne(Certifi::class, ['User_id' => 'User_id']);
-}
+    {
+        return $this->hasOne(Certifi::class, ['User_id' => 'User_id']);
+    }
 
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Nombre_cert = strtoupper($this->Nombre_cert);
+            $this->Institución = strtoupper($this->Institución);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
