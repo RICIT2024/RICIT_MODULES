@@ -15,11 +15,16 @@ use yii\widgets\ActiveForm;
     <div class="container-fluid">
     <?= $form->field($model, 'User_id')->textInput(['value' => $hum_uid,'readonly' => true]) ?>
 
-        <?= $form->field($model, 'Institucion')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Institucion')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-        <?= $form->field($model, 'Pais')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Pais')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-        <?= $form->field($model, 'Periodo')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'Periodo')->textInput([
+            'maxlength' => true,
+            'placeholder' => 'AAAA-AAAA',
+            'pattern' => '\d{4}-\d{4}',
+            'title' => 'Debe ser un periodo con el formato AAAA-AAAA'
+            ]) ?>
     </div>
 
     <div class="form-group">
