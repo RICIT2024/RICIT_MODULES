@@ -19,34 +19,39 @@ use yii\widgets\ActiveForm;
         
         <div class="row">
             <span class="col-md-6">
-                <?= $form->field($model, 'Autor')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true, 'placeholder'=>'John Doe']) ?>
+                <?= $form->field($model, 'Autor')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Autores_sec')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true, 'placeholder'=>'Jane Smith Garza']) ?>
+                <?= $form->field($model, 'Autores_sec')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Anio')->textInput(['placeholder'=>2020]) ?>
+                <?= $form->field($model, 'Anio')->textInput([
+                    'maxlength' => true,
+                    'placeholder' => 'AAAA ',
+                    'pattern' => '\d{4}',
+                    'title' => 'Debe ser un año valido'
+                ]) ?>
 
-                <?= $form->field($model, 'Titulo')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true, 'placeholder'=>'Sample Book']) ?>
+                <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Resumen')->textInput(['maxlength' => true, 'placeholder'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a felis et ligula fermentum ultrices sit amet non sapien. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;']) ?>
+                <?= $form->field($model, 'Resumen')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;', 'placeholder' => 'Máximo 255 caracteres']) ?>
 
             </span>
 
             <span class="col-md-6">
-                <?= $form->field($model, 'ISBN')->textInput(['maxlength' => true, 'placeholder'=>'0-7645-2641-3']) ?>
+                <?= $form->field($model, 'ISBN')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'Formato')->dropDownList($model->getFormato(), ['prompt' => 'Select Tipo'] ) ?>
+                <?= $form->field($model, 'Formato')->dropDownList($model->getFormato(), ['prompt' => 'Selecciona el Tipo de Libro'] ) ?>
 
-                <?= $form->field($model, 'Editorial')->textInput(['maxlength' => true, 'placeholder'=>'Sample Publisher']) ?>
+                <?= $form->field($model, 'Editorial')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'URL')->textInput(['maxlength' => true, 'placeholder'=>'http://sampleurl.com/article']) ?>
+                <?= $form->field($model, 'URL')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true, 'placeholder'=>'Research, science']) ?>
+                <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
             </span>
         </div>
     </div>
 
     <div class="form-group" style="margin-left: 10px; padding-bottom:10px;">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

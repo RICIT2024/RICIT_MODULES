@@ -5,16 +5,12 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\Libros $model */
 
-$this->title = 'Update Libros: ' . $model->Libro_id;
-$type = "Capitulos";
-$action ="Actualizar";
-$folder ="capitulos";
 ?>
 <div class="libros-update">
 
-    <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
-        <?= Html::encode($this->title) ?>
-    </h1>
+    <p>
+        <?= Html::a('<i class="fa fa-arrow-left" style="color: #FFFFFF;"></i>', ['index'], ['class' => 'btn btn-default', 'style' => 'background-color: #691C32;']) ?>    
+    </p>
 
     <?= $this->render('_form', [
         'model' => $model,
