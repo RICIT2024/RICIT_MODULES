@@ -9,11 +9,11 @@ use yii\helpers\Html;
                 <div class="collapse navbar-collapse" id="production_nav">
                     <ul class="nav navbar-nav">
                         <li>
-                            <?= Html::a('Articulos', Url::to(['articulos/index']), ['style' => 'font-weight: bold; ']) ?>
+                            <?= Html::a('Artículos', Url::to(['articulos/index']), ['style' => 'font-weight: bold; ']) ?>
                         </li>
 
                         <li>
-                            <?= Html::a('Capitulos', Url::to(['capitulos/index']), ['style' => 'font-weight: bold; ']) ?>
+                            <?= Html::a('Capítulos', Url::to(['capitulos/index']), ['style' => 'font-weight: bold; ']) ?>
                         </li>
 
                         <li>
