@@ -3,6 +3,8 @@
 namespace ricit\humhub\modules\test\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
+
 
 /**
  * This is the model class for table "libros".
@@ -21,7 +23,7 @@ use Yii;
  * @property string $URL
  * @property string $Palabras_clave
  */
-class Libros extends \yii\db\ActiveRecord
+class Libros extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -73,20 +75,38 @@ class Libros extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Libro_id' => 'LIBRO ID',
-            'User_id' => 'USER ID',
-            'Autor' => 'AUTOR',
-            'Autores_sec' => 'AUTOR(ES) SECUNDARIO',
-            'Anio' => 'AÑO',
-            'Titulo' => 'TITULO',
-            'Resumen' => 'RESUMEN (ABSTRACT)',
-            'Editorial' => 'EDITORIAL',
+            'Libro_id' => 'ID LIBRO',
+            'User_id' => 'Usuario',
+            'Autor' => 'Autor',
+            'Autores_sec' => 'Autor(es) secundario',
+            'Anio' => 'Año',
+            'Titulo' => 'Título',
+            'Resumen' => 'Resumen',
+            'Editorial' => 'Editorial',
             'ISBN' => 'ISBN',
-            'Formato' => 'FORMATO',
+            'Formato' => 'Formato',
             'URL' => 'URL',
-            'Palabras_clave' => 'PALABRAS CLAVE',
+            'Palabras_clave' => 'Palabras Clave',
         ];
     }
 
-    
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Autor = strtoupper($this->Autor);
+            $this->Autores_sec = strtoupper($this->Autores_sec);
+            $this->Titulo = strtoupper($this->Titulo);
+            $this->Resumen = strtoupper($this->Resumen);
+            $this->Editorial = strtoupper($this->Editorial);
+            $this->Formato = strtoupper($this->Formato);
+            $this->Palabras_clave = strtoupper($this->Palabras_clave);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
