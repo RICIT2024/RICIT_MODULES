@@ -11,7 +11,7 @@ use yii\db\Query;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 // Register the external JavaScript file
-$this->title = 'Articulos';
+$this->title = 'Artículos';
 ?>
 
 <div class="articulos-index">
@@ -26,7 +26,6 @@ $this->title = 'Articulos';
             <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
-        <div style="text-align: center;">
             <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
@@ -44,22 +43,11 @@ $this->title = 'Articulos';
                         return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
                     },
                 ],
-                [
-                    'attribute' => 'Autor',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Autores',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Anio',
-                    'headerOptions' => ['style' => 'text-align: center;  width:50px;'],
-                ],
-                [
-                    'attribute' => 'Titulo',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
+                'Autor',
+                'Autores',
+                'Anio',
+                'Titulo',
+                
                 //'Resumen',
                     //'Revista',
                     //'Pais',
@@ -76,8 +64,6 @@ $this->title = 'Articulos';
                     }
                     ],
                 ],
-            ]); ?>
-        </div>  
-      
+            ]); ?>      
     </div>
 </div>
