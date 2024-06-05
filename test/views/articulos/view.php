@@ -18,7 +18,7 @@ use yii\db\Query;
 
     <p>
         <?= Html::a('Actualizar', ['update', 'Articulos_id' => $model->Articulos_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Borrar', ['delete', 'Articulos_id' => $model->Articulos_id], [
+        <?= Html::a('Eliminar', ['delete', 'Articulos_id' => $model->Articulos_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => '¿Estás seguro de eliminar este artículo?',
