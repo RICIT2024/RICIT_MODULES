@@ -3,6 +3,7 @@
 namespace ricit\humhub\modules\test\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cap_libros".
@@ -20,7 +21,7 @@ use Yii;
  * @property string $URL
  * @property string $Palabras_clave
  */
-class CapLibros extends \yii\db\ActiveRecord
+class CapLibros extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -73,20 +74,42 @@ class CapLibros extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Cap_id' => 'Cap ID',
-            'User_id' => 'USER ID',
-            'Anio' => 'AÑO',
-            'Titulo_capitulo' => 'TITULO CAPITULO',
-            'Autor_libro' => 'AUTOR LIBRO',
-            'Autores_capitulo' => 'AUTORES CAPITULO',
-            'Resumen' => 'RESUMEN (ABSTRACT)',
-            'Paginas' => 'PAGINAS',
-            'Titulo_libro' => 'TITULO LIBRO',
-            'Editores' => 'EDITOR(ES)',
+            'Cap_id' => 'ID Capítulos',
+            'User_id' => 'Usuario',
+            'Anio' => 'Año',
+            'Titulo_capitulo' => 'Título del capítulo',
+            'Autor_libro' => 'Autor del libro',
+            'Autores_capitulo' => 'Autores del capítulo',
+            'Resumen' => 'Resumen',
+            'Paginas' => 'Páginas',
+            'Titulo_libro' => 'Título del libro',
+            'Editores' => 'Editor(es)',
             'ISBN' => 'ISBN',
             'URL' => 'URL',
-            'Palabras_clave' => 'PALABRAS CLAVE',
-            'Formato' => 'FORMATO'
+            'Palabras_clave' => 'Palabras clave',
+            'Formato' => 'Formato'
         ];
     }
-}
+        /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Titulo_capitulo = strtoupper($this->Titulo_capitulo);
+            $this->Autor_libro = strtoupper($this->Autor_libro);
+            $this->Autores_capitulo = strtoupper($this->Autores_capitulo);
+            $this->Resumen = strtoupper($this->Resumen);
+            $this->Titulo_libro = strtoupper($this->Titulo_libro);
+            $this->Editores = strtoupper($this->Editores);
+            $this->Palabras_clave = strtoupper($this->Palabras_clave);
+            $this->Formato = strtoupper($this->Formato);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    }
+
