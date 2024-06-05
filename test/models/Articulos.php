@@ -38,7 +38,7 @@ class Articulos extends ActiveRecord
     public function rules()
     {
         return [
-            [['User_id', 'Autor', 'Autores', 'Anio', 'Titulo', 'Resumen', 'Revista', 'Pais', 'Idioma', 'ISSNs', 'URL', 'DOI', 'Palabras_clave'], 'required'],
+            [['User_id', 'Autor', 'Autores', 'Anio', 'Titulo', 'Resumen', 'Revista', 'Pais', 'Idioma', 'URL', 'DOI', 'Palabras_clave'], 'required'],
             [['User_id', 'Anio'], 'integer'],
             [['Autor', 'Autores', 'Titulo', 'Resumen', 'Revista', 'URL', 'Palabras_clave'], 'string', 'max' => 255],
             [['Pais', 'Idioma', 'DOI'], 'string', 'max' => 50],
