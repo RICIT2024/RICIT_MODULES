@@ -17,7 +17,7 @@ class SearchA extends Articulos
     {
         return [
             [['Articulos_id', 'User_id', 'Anio'], 'integer'],
-            [['Autor', 'Autores', 'Titulo', 'Resumen', 'Revista', 'Pais', 'Idioma', 'ISSNs', 'URL', 'DOI', 'Palabras_clave'], 'safe'],
+            [['Autor', 'Autores', 'Titulo', 'Resumen', 'Revista', 'Pais', 'Idioma', 'URL', 'DOI', 'Palabras_clave'], 'safe'],
         ];
     }
 
@@ -69,7 +69,6 @@ class SearchA extends Articulos
             ->andFilterWhere(['like', 'Revista', $this->Revista])
             ->andFilterWhere(['like', 'Pais', $this->Pais])
             ->andFilterWhere(['like', 'Idioma', $this->Idioma])
-            ->andFilterWhere(['like', 'ISSNs', $this->ISSNs])
             ->andFilterWhere(['like', 'URL', $this->URL])
             ->andFilterWhere(['like', 'DOI', $this->DOI])
             ->andFilterWhere(['like', 'Palabras_clave', $this->Palabras_clave]);
@@ -109,7 +108,6 @@ class SearchA extends Articulos
             ->andFilterWhere(['like', 'Revista', $this->Revista])
             ->andFilterWhere(['like', 'Pais', $this->Pais])
             ->andFilterWhere(['like', 'Idioma', $this->Idioma])
-            ->andFilterWhere(['like', 'ISSNs', $this->ISSNs])
             ->andFilterWhere(['like', 'URL', $this->URL])
             ->andFilterWhere(['like', 'DOI', $this->DOI])
             ->andFilterWhere(['like', 'Palabras_clave', $this->Palabras_clave]);

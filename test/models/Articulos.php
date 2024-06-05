@@ -3,6 +3,7 @@
 namespace ricit\humhub\modules\test\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articulos".
@@ -17,12 +18,11 @@ use Yii;
  * @property string $Revista
  * @property string $Pais
  * @property string $Idioma
- * @property string $ISSNs
  * @property string $URL
  * @property string $DOI
  * @property string $Palabras_clave
  */
-class Articulos extends \yii\db\ActiveRecord
+class Articulos extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -42,7 +42,6 @@ class Articulos extends \yii\db\ActiveRecord
             [['User_id', 'Anio'], 'integer'],
             [['Autor', 'Autores', 'Titulo', 'Resumen', 'Revista', 'URL', 'Palabras_clave'], 'string', 'max' => 255],
             [['Pais', 'Idioma', 'DOI'], 'string', 'max' => 50],
-            [['ISSNs'], 'string', 'max' => 20],
         ];
     }
 
@@ -64,20 +63,40 @@ class Articulos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Articulos_id' => 'Articulos ID',
-            'User_id' => 'USER ID',
-            'Autor' => 'AUTOR',
-            'Autores' => 'AUTOR(ES) SECUNDARIO',
-            'Anio' => 'AÑO',
-            'Titulo' => 'TITULO',
-            'Resumen' => 'RESUMEN (ABSTRACT)',
-            'Revista' => 'REVISTA',
-            'Pais' => 'PAIS',
-            'Idioma' => 'IDIOMA',
-            'ISSNs' => 'ISSNS',
+            'Articulos_id' => 'ID Articulos ',
+            'User_id' => 'Usuario',
+            'Autor' => 'Autor',
+            'Autores' => 'Autor(es) secundarios',
+            'Anio' => 'Año',
+            'Titulo' => 'Título',
+            'Resumen' => 'Resumen',
+            'Revista' => 'Revista',
+            'Pais' => 'País',
+            'Idioma' => 'Idioma',
             'URL' => 'URL',
             'DOI' => 'DOI',
-            'Palabras_clave' => 'PALABRAS CLAVE',
+            'Palabras_clave' => 'Palabras Clave',
         ];
+    }
+
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Autor = strtoupper($this->Autor);
+            $this->Autores = strtoupper($this->Autores);
+            $this->Titulo = strtoupper($this->Titulo);
+            $this->Resumen = strtoupper($this->Resumen);
+            $this->Revista = strtoupper($this->Revista);
+            $this->Pais = strtoupper($this->Pais);
+            $this->Idioma = strtoupper($this->Idioma);
+            $this->Palabras_clave = strtoupper($this->Palabras_clave);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
