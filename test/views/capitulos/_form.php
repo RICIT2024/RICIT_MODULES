@@ -18,31 +18,36 @@ use yii\widgets\ActiveForm;
         <div class="row">
 
             <span class="col-md-6">
-                <?= $form->field($model, 'Anio')->textInput() ?>
+                <?= $form->field($model, 'Anio')->textInput([
+                    'maxlength' => true,
+                    'placeholder' => 'AAAA ',
+                    'pattern' => '\d{4}',
+                    'title' => 'Debe ser un año valido'
+                ]) ?>
 
-                <?= $form->field($model, 'Titulo_capitulo')->textInput(['maxlength' => true],) ?>
+                <?= $form->field($model, 'Titulo_capitulo')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Autor_libro')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Autor_libro')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Autores_capitulo')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Autores_capitulo')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Formato')->dropDownList($model->getFormato(), ['prompt' => 'Select Tipo'] ) ?>
+                <?= $form->field($model, 'Formato')->dropDownList($model->getFormato(), ['prompt' => 'Selecciona el Tipo de Formato'] ) ?>
 
-                <?= $form->field($model, 'Resumen')->textInput(['maxlength' => true, 'placeholder'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.']) ?>
+                <?= $form->field($model, 'Resumen')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;', 'placeholder' => 'máximo 255 caracteres ', ]) ?>
             </span>
 
             <span class="col-md-6">
                 <?= $form->field($model, 'Paginas')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'Titulo_libro')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Titulo_libro')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Editores')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Editores')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
                 <?= $form->field($model, 'ISBN')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'URL')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
             </span>
         </div>
     </div>

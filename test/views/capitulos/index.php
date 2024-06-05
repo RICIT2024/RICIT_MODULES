@@ -5,12 +5,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\db\Query;
 
 /** @var yii\web\View $this */
 /** @var app\models\SearchC $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Capitulos de Libros';
+$this->title = 'Capítulos de Libros';
 ?>
 <div class="cap-libros-index">
     <div class="container-fluid">
@@ -23,15 +24,23 @@ $this->title = 'Capitulos de Libros';
             <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-                'Cap_id',
-                'User_id',
+                [
+                    'attribute' => 'User_id',
+                    'value' => function ($model) {
+                        $profile = (new Query())
+                            ->select(['firstname', 'lastname'])
+                            ->from('profile')
+                            ->where(['user_id' => $model->User_id])
+                            ->one();
+    
+                        return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                    },
+                ],
                 'Anio',
                 'Titulo_capitulo',
                 'Paginas',
@@ -42,6 +51,8 @@ $this->title = 'Capitulos de Libros';
                 //'Editores',
                 //'ISBN',
                 //'URL:url',
+                //'Palabras_clave',
+
                 [
                     'class' => ActionColumn::class,
                     'urlCreator' => function ($action, CapLibros $model, $key, $index, $column) {

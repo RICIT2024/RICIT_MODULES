@@ -6,22 +6,13 @@ use yii\helpers\Html;
 /** @var app\models\CapLibros $model */
 $hum_uid=Yii::$app->user->getId();    
 
-$this->title = 'Create Capitulo Libros';
-$type = "Capitulos";
-$action ="Crear";
-$folder ="capitulos";
 ?>
 <div class="cap-libros-create">
     
-    <?= $this->render('@test/views/layouts/nav', [
-        'type' => $type,
-        'action' => $action,
-        'folder'=> $folder,
-    ]) ?>
 
-    <h1 style="padding-top:10px; margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
-        <?= Html::encode($this->title) ?>
-    </h1>
+    <p>
+        <?= Html::a('<i class="fa fa-arrow-left" style="color: #FFFFFF;"></i>', ['index'], ['class' => 'btn btn-default', 'style' => 'background-color: #691C32; color: #FFFFFF;']) ?>    
+    </p>
 
     <?= $this->render('_form', [
         'model' => $model,
