@@ -51,7 +51,6 @@ use yii\db\Query;
             'Editorial',
             'ISBN',
             'Formato',
-            'DOI',
             'URL:url',
             'Palabras_clave',
         ],
