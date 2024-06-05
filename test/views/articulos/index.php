@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use ricit\humhub\modules\test\models\Articulos;
+use yii\db\Query;
 
 /** @var yii\web\View $this */
 /** @var ricit\models\SearchA $searchModel */
@@ -25,8 +26,6 @@ $this->title = 'Articulos';
             <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
         <div style="text-align: center;">
             <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -34,10 +33,17 @@ $this->title = 'Articulos';
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 [
-                    'attribute' => 'Articulos_id',
-                    'headerOptions' => ['style' => 'text-align: center; width:80px'],
+                    'attribute' => 'User_id',
+                    'value' => function ($model) {
+                        $profile = (new Query())
+                            ->select(['firstname', 'lastname'])
+                            ->from('profile')
+                            ->where(['user_id' => $model->User_id])
+                            ->one();
+    
+                        return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                    },
                 ],
-                //'User_id',
                 [
                     'attribute' => 'Autor',
                     'headerOptions' => ['style' => 'text-align: center;'],

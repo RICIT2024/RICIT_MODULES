@@ -2,37 +2,26 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\db\Query;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Articulos $model */
-
-$this->title = $model->Titulo;
-
-$this->params['breadcrumbs'][] = $this->title;
-$type = "Articulo";
-$action ="Ver";
-$folder ="articulos";
 
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="articulos-view">
     
-    <?= $this->render('@test/views/layouts/nav', [
-        'type' => $type,
-        'action' => $action,
-        'folder'=> $folder,
-    ]) ?>
-
-    <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
-        <?= Html::encode($this->title) ?>
-    </h1>
+    <p>
+        <?= Html::a('<i class="fa fa-arrow-left" style="color: #FFFFFF;"></i>', ['index'], ['class' => 'btn btn-default', 'style' => 'background-color: #691C32;']) ?>    
+    </p>
 
     <p>
         <?= Html::a('Actualizar', ['update', 'Articulos_id' => $model->Articulos_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Borrar', ['delete', 'Articulos_id' => $model->Articulos_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Seguro que deseas eliminar el registro?',
+                'confirm' => '¿Estás seguro de eliminar este artículo?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -42,7 +31,18 @@ $folder ="articulos";
         'model' => $model,
         'attributes' => [
             'Articulos_id',
-            'User_id',
+            [
+                'label' => 'Usuario',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Autor',
             'Autores',
             'Anio',
@@ -51,7 +51,6 @@ $folder ="articulos";
             'Revista',
             'Pais',
             'Idioma',
-            'ISSNs',
             'URL:url',
             'DOI',
             'Palabras_clave',

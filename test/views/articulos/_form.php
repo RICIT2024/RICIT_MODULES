@@ -17,31 +17,34 @@ use yii\widgets\ActiveForm;
         <div class="row">
 
         <span class="col-md-6 col-sm-6">
-            <?= $form->field($model, 'Autor')->textInput(['maxlength' => true, 'placeholder'=>'Person Name']) ?>
+            <?= $form->field($model, 'Autor')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Autores')->textInput(['maxlength' => true, 'placeholder'=>'John Doe, Jane Doe']) ?>
+            <?= $form->field($model, 'Autores')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Anio')->textInput(['placeholder'=>2020]) ?>
+            <?= $form->field($model, 'Anio')->textInput([
+                'maxlength' => true,
+                'placeholder' => 'AAAA ',
+                'pattern' => '\d{4}',
+                'title' => 'Debe ser un año valido'
+                ]) ?>
 
-            <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true, 'placeholder'=>'Sample Book']) ?>
+            <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Resumen')->textarea(['maxlength' => true, 'placeholder'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit.']) ?>
+            <?= $form->field($model, 'Resumen')->textarea(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Revista')->textInput(['maxlength' => true, 'placeholder'=>'Sample Magazine']) ?>
+            <?= $form->field($model, 'Revista')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
         </span>
 
         <span class="col-md-6 col-sm-6">
-            <?= $form->field($model, 'Pais')->textInput(['maxlength' => true, 'placeholder'=>'Mexico']) ?>
+            <?= $form->field($model, 'Pais')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Idioma')->textInput(['maxlength' => true, 'placeholder'=>'Español']) ?>
+            <?= $form->field($model, 'Idioma')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'ISSNs')->textInput(['maxlength' => true, 'placeholder'=>'0-7645-2641-3']) ?>
+            <?= $form->field($model, 'URL')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'URL')->textInput(['maxlength' => true, 'placeholder'=>'http://sampleurl.com/article']) ?>
+            <?= $form->field($model, 'DOI')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'DOI')->textInput(['maxlength' => true, 'placeholder'=>'54321']) ?>
-
-            <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true, 'placeholder'=>'Articulo, Economia, Ambiente']) ?>
+            <?= $form->field($model, 'Palabras_clave')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
         </span>
      </div>
     </div>

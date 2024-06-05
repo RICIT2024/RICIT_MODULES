@@ -7,23 +7,11 @@ use yii\helpers\Html;
 
 $hum_uid=Yii::$app->user->getId();    
 
-$this->title = 'Create Articulos';
-
-//Breadcrumbs parametros
-$type = "Articulo";
-$action ="Crear";
-$folder ="articulos";
 ?>
 <div class="articulos-create">
-    <?= $this->render('@test/views/layouts/nav', [
-        'type' => $type,
-        'action' => $action,
-        'folder'=> $folder,
-    ]) ?>
-
-    <h1 style="margin-top:10px; font-weight:bold; font-size:20px; width:auto; text-align:center;">
-        <?= Html::encode($this->title) ?>
-    </h1>
+    <p>
+        <?= Html::a('<i class="fa fa-arrow-left" style="color: #FFFFFF;"></i>', ['index'], ['class' => 'btn btn-default', 'style' => 'background-color: #691C32; color: #FFFFFF;']) ?>    
+    </p>
 
     <?= $this->render('_form', [
         'model' => $model,
