@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-            <?= $form->field($model, 'Resumen')->textarea(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
+            <?= $form->field($model, 'Resumen')->textarea(['maxlength' => true,'style' => 'text-transform: uppercase;', 'placeholder' => 'Máximo 255 caracteres']) ?>
 
             <?= $form->field($model, 'Revista')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
         </span>
