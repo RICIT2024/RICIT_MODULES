@@ -7,7 +7,7 @@ namespace ricit\humhub\modules\RecursosHumanos\controllers;
 use yii\data\ActiveDataProvider;
 
 use humhub\components\behaviors\AccessControl;
-use ricit\humhub\modules\RecursosHumanos\models\Tesis;
+use ricit\humhub\modules\RecursosHumanos\models\Docencia;
 use humhub\modules\content\components\ContentContainerController;
 
 class UserController extends ContentContainerController
@@ -33,15 +33,19 @@ class UserController extends ContentContainerController
         $User_id = $this->contentContainer->id;
 
         $provider = new ActiveDataProvider([
-            'query' => Tesis::find()->where(['tesis.User_id'=>$User_id]),
+            'query' => Docencia::find()->where(['docencia.User_id'=>$User_id]),
             'pagination' => [
                 'pageSize' => 10, // Adjust page size as needed
             ],
             'sort' => [
                 'attributes' => [
-                    'Institucion',
-                    'Pais',
-                    'Periodo',
+                    'Dependencia',
+            'Nivel_impartido' ,
+            'Nombre_programa',
+            'Pais',
+            'Estado',
+            'Nombre_asignatura',
+            'Periodo',
                 ],
             ],
         ]);
