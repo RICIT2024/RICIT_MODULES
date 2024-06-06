@@ -7,7 +7,7 @@ use humhub\components\behaviors\AccessControl;
 use ricit\humhub\modules\cientificos\models\cientificos;
 use humhub\modules\content\components\ContentContainerController;
 
-class IndexController extends ContentContainerController
+class UserController extends ContentContainerController
 {
     public function behaviors()
     {
