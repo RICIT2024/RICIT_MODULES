@@ -16,7 +16,7 @@ class Events
     {
         if ($event->sender->user !== null && $event->sender->user->moduleManager->isEnabled('certifi')) {
             $event->sender->addItem([
-                'label' => Yii::t('CertifiModule.base', 'certificaciones'), //cambiar nombre del módulo
+                'label' => Yii::t('CertifiModule.base', 'Certificaciones'), //cambiar nombre del módulo
                 'url' => $event->sender->user->createUrl('/certifi/user'),
                 'icon' => '<i class="fa fa-check-circle"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'certifi')
