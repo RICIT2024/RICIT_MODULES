@@ -2,26 +2,35 @@
     use ricit\humhub\modules\test\models\ScientificProduction;
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use yii\grid\GridView;    
+    use yii\grid\ActionColumn;
+    use yii\grid\GridView;
+    use yii\db\Query;
+    
     
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?= Yii::t('UserModule.profile', '<strong>Producción Cientifica del Usuario</strong>') ?>
+        <?= Yii::t('UserModule.profile', '<strong>Producción Cientifica</strong>') ?>
     </div>
 
 <?php   
 
-use yii\grid\ActionColumn;
    echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' =>[
-         [            
-             // you may configure additional properties here
-             'attribute' => 'P_id',
-             'label' =>'ID',
-             'headerOptions'=>[ 'style'=>'background-color:#BC955C; width:5%; text-align: center;' ]
-         ],
+        [
+            'attribute' => 'User_id',
+            'headerOptions'=>[ 'style'=>'background-color:#BC955C; text-align: center;' ],
+            'value' => function ($model) {
+                $profile = (new Query())
+                    ->select(['firstname', 'lastname'])
+                    ->from('profile')
+                    ->where(['user_id' => $model->User_id])
+                    ->one();
+
+                return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+            },
+        ],
          [            
             // you may configure additional properties here
             'attribute' => 'Autor',
@@ -48,13 +57,6 @@ use yii\grid\ActionColumn;
             'attribute' => 'Tipo',
             'headerOptions'=>[ 'style'=>'background-color:#BC955C; width:8%; text-align: center;' ]
          ],
-         [  //en producción, deberia redireccionar a la pagina del identificador, ej. Libros. 
-            'class' => ActionColumn::class,
-            'template' => '{view}',
-            'urlCreator' => function ($action, ScientificProduction $model) {
-                return Url::toRoute([$action, 'SP_id' => $model->SP_id]);
-            }
-        ],
       ],
      ]);
 
