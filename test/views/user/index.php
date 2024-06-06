@@ -18,19 +18,7 @@
    echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' =>[
-        [
-            'attribute' => 'User_id',
-            'headerOptions'=>[ 'style'=>'background-color:#BC955C; text-align: center;' ],
-            'value' => function ($model) {
-                $profile = (new Query())
-                    ->select(['firstname', 'lastname'])
-                    ->from('profile')
-                    ->where(['user_id' => $model->User_id])
-                    ->one();
-
-                return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
-            },
-        ],
+        
          [            
             // you may configure additional properties here
             'attribute' => 'Autor',
