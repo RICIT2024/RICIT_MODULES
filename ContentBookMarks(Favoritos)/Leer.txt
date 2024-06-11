@@ -1,0 +1,12 @@
+Archivo StreamViewer.php:
+Ruta del modulo content-bookmarks para el mensaje de inicio 
+cuando no se tienen favoritos registrados:
+
+content-bookmarks/widgets/StreamViewer.php
+
+
+Archivo BookmarkController.php:
+Ruta del modulo content-bookmarks para los mensajes de favoritos
+agregados,eliminados, error:
+
+content-bookmarks/controllers/BookmarkController.php
