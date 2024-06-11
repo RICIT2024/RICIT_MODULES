@@ -3,6 +3,7 @@
 namespace ricit\humhub\modules\test\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "ponencias".
@@ -20,7 +21,7 @@ use Yii;
  * @property string $Memoria
  * @property string $Publicación
  */
-class Ponencias extends \yii\db\ActiveRecord
+class Ponencias extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,7 +37,7 @@ class Ponencias extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['User_id', 'Tipo', 'Participación', 'Autor', 'Anio', 'País', 'Titulo_evento', 'Titulo_ponencia', 'Resumen', 'Memoria'], 'required'],
+            [['User_id', 'Tipo', 'Participación', 'Autor', 'Anio', 'País', 'Titulo_evento', 'Titulo_ponencia', 'Resumen', 'Memoria','Publicación'], 'required'],
             [['User_id', 'Anio'], 'integer'],
             [['Tipo', 'Participación', 'Autor', 'País', 'Titulo_evento', 'Titulo_ponencia', 'Resumen', 'Memoria', 'Publicación'], 'string', 'max' => 255],
         ];
@@ -129,18 +130,40 @@ class Ponencias extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Ponencia_id' => 'Ponencia ID',
-            'User_id' => 'User ID',
+            'Ponencia_id' => 'ID Ponencia',
+            'User_id' => 'Usuario',
             'Tipo' => 'Tipo',
             'Participación' => 'Participación',
-            'Autor' => 'Nombre',
+            'Autor' => 'Autor',
             'Anio' => 'Año',
             'País' => 'País',
-            'Titulo_evento' => 'Titulo Evento',
-            'Titulo_ponencia' => 'Titulo Ponencia',
+            'Titulo_evento' => 'Titulo del Evento',
+            'Titulo_ponencia' => 'Titulo de la Ponencia',
             'Resumen' => 'Resumen',
             'Memoria' => 'Memoria',
             'Publicación' => 'Publicación'
         ];
+    }
+
+       /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Tipo = strtoupper($this->Tipo);
+            $this->Participación = strtoupper($this->Participación);
+            $this->Autor = strtoupper($this->Autor);
+            $this->País = strtoupper($this->País);
+            $this->Titulo_evento = strtoupper($this->Titulo_evento);
+            $this->Titulo_ponencia = strtoupper($this->Titulo_ponencia);
+            $this->Resumen = strtoupper($this->Resumen);
+            $this->Memoria = strtoupper($this->Memoria);
+            $this->Publicación = strtoupper($this->Publicación);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
