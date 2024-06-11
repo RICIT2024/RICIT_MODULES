@@ -24,8 +24,6 @@ $this->title = 'Tesis';
         <?= Html::a('Registrar', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -34,29 +32,11 @@ $this->title = 'Tesis';
 
             //'Tesis_id',
             //'User_id',
-            [
-                'attribute' => 'Autor',
-                'headerOptions' => ['style' => 'text-align: center;'],
-            ],            
-            [
-                'attribute' => 'Grado_academico',
-                'label' => 'Grado Academico',
-                'headerOptions' => ['style' => 'text-align: center;'],
-            ],
-            [
-                'attribute' => 'Institucion_procedencia',
-                'label' => 'Institución',
-                'headerOptions' => ['style' => 'text-align: center;'],
-            ],
-            [
-                'attribute' => 'Anio',
-                'label' => 'Año',
-                'headerOptions' => ['style' => 'text-align: center;'],
-            ], 
-            [
-                'attribute' => 'Titulo',
-                'headerOptions' => ['style' => 'text-align: center;'],
-            ],           
+            'Autor',
+            'Grado_academico',
+            'Institucion_procedencia',
+            'Anio',
+            'Titulo',          
             //'Pais',
             [
                 'class' => ActionColumn::class,

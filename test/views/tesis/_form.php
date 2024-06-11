@@ -17,19 +17,25 @@ use yii\widgets\ActiveForm;
 
         <div class="row">
             <span class="col-md-6 col-sm-6">
-                <?= $form->field($model, 'Autor')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Autor')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Grado_academico')->dropDownList($model->getOptions(), ['prompt' => 'Select Tipo'] ) ?>
+                <?= $form->field($model, 'Grado_academico')->dropDownList($model->getOptions(), ['prompt' => 'Selecciona el grado académico'] ) ?>
 
-                <?= $form->field($model, 'Institucion_procedencia')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Institucion_procedencia')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
             </span>
 
             <span class="col-md-6 col-sm-6">
-                <?= $form->field($model, 'Anio')->textInput() ?>
+                <?= $form->field($model, 'Anio')->textInput([
+                    'maxlength' => true,
+                    'placeholder' => 'AAAA ',
+                    'pattern' => '\d{4}',
+                    'title' => 'Debe ser un año valido'
+                
+                ]) ?>
 
-                <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Titulo')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Pais')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'Pais')->textInput(['maxlength' => true, 'style' => 'text-transform: uppercase;']) ?>
             </span>
         </div>
     
