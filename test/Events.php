@@ -17,7 +17,7 @@ class Events
     public static function onTopMenuInit($event)
     {
         $event->sender->addItem([
-            'label' => 'Produción Cientifica',
+            'label' => 'Producción Científica',
             'icon' => '<i class="fa fa-book"></i>',
             'url' => Url::to(['/test/index']),
             'sortOrder' => 99999,
@@ -34,7 +34,7 @@ class Events
     {
         if ($event->sender->user !== null && $event->sender->user->moduleManager->isEnabled('test')) {
             $event->sender->addItem([
-                'label' => Yii::t('TestModule.base', 'Produción Cientifica'),
+                'label' => Yii::t('TestModule.base', 'Producción Científica'),
                 'url' => $event->sender->user->createUrl('/test/user'),
                 'icon' => '<i class="fa fa-book"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'test')
@@ -50,7 +50,7 @@ class Events
     public static function onAccountMenuInit($event)
     {
             $event->sender->addItem([
-                'label' => Yii::t('TestModule.base', 'Produción Cientifica'),
+                'label' => Yii::t('TestModule.base', 'Producción Científica'),
                 'url' => Url::to(['/test/articulos']),
                 'icon' => '<i class="fa fa-book"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'test' && Yii::$app->controller->id == 'articulos'),
