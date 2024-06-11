@@ -3,6 +3,8 @@
 namespace ricit\humhub\modules\test\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
+
 
 /**
  * This is the model class for table "tesis".
@@ -55,14 +57,32 @@ class Tesis extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'Tesis_id' => 'TESIS ID',
-            'User_id' => 'USER ID',
-            'Autor' => 'AUTOR',
-            'Grado_academico' => 'GRADO ACADEMICO',
-            'Institucion_procedencia' => 'INSTITUCIÓN PROCEDENCIA',
-            'Anio' => 'AÑO',
-            'Titulo' => 'TITULO',
-            'Pais' => 'PAIS',
+            'Tesis_id' => 'ID Tesis',
+            'User_id' => 'Usuario',
+            'Autor' => 'Autor',
+            'Grado_academico' => 'Grado Académico',
+            'Institucion_procedencia' => 'Institución de procedencia',
+            'Anio' => 'Año',
+            'Titulo' => 'Título',
+            'Pais' => 'País',
         ];
+    }
+
+    /**
+     * Convierte ciertos atributos a mayúsculas antes de guardar.
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            // Convertir los atributos de texto a mayúsculas antes de guardar
+            $this->Autor = strtoupper($this->Autor);
+            $this->Grado_academico = strtoupper($this->Grado_academico);
+            $this->Institucion_procedencia = strtoupper($this->Institucion_procedencia);
+            $this->Titulo = strtoupper($this->Titulo);
+            $this->Pais = strtoupper($this->Pais);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
