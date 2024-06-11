@@ -18,27 +18,32 @@ use yii\widgets\ActiveForm;
 
         <row>
             <span class="col-md-6">
-                <?= $form->field($model, 'Tipo')->dropDownList($model->getTipoOptions(), ['prompt' => 'Select Tipo'] ) ?>
+                <?= $form->field($model, 'Tipo')->dropDownList($model->getTipoOptions(), ['prompt' => 'Selecciona el tipo de ponencia'] ) ?>
 
-                <?= $form->field($model, 'Participación')->dropDownList($model->getParticipacionOptions(), ['prompt' => 'Select Tipo'] )?>
+                <?= $form->field($model, 'Participación')->dropDownList($model->getParticipacionOptions(), ['prompt' => 'Selecciona el tipo de participación'] )?>
 
-                <?= $form->field($model, 'Autor')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true, 'value'=>$name]) ?>
+                <?= $form->field($model, 'Autor')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Anio')->textInput() ?>
+                <?= $form->field($model, 'Anio')->textInput([
+                    'maxlength' => true,
+                    'placeholder' => 'AAAA ',
+                    'pattern' => '\d{4}',
+                    'title' => 'Debe ser un año valido'
+                ]) ?>
 
-                <?= $form->field($model, 'País')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true]) ?>
+                <?= $form->field($model, 'País')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
             </span>
 
             <span class="col-md-6">
-                <?= $form->field($model, 'Titulo_evento')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true]) ?>
+                <?= $form->field($model, 'Titulo_evento')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Titulo_ponencia')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true]) ?>
+                <?= $form->field($model, 'Titulo_ponencia')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
 
-                <?= $form->field($model, 'Resumen')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true]) ?>
+                <?= $form->field($model, 'Resumen')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;', 'placeholder' => 'Máximo 255 caracteres']) ?>
 
-                <?= $form->field($model, 'Memoria')->dropDownList($model->getMemoriaOptions(), ['prompt' => 'Select Tipo'] ) ?>
+                <?= $form->field($model, 'Memoria')->dropDownList($model->getMemoriaOptions(), ['prompt' => 'Selecciona el tipo de memoria'] ) ?>
 
-                <?= $form->field($model, 'Publicación')->textInput(['onchange' => 'this.value = this.value.toUpperCase();'],['maxlength' => true]) ?>
+                <?= $form->field($model, 'Publicación')->textInput(['maxlength' => true,'style' => 'text-transform: uppercase;']) ?>
             </span>
         </row>
     </div>
