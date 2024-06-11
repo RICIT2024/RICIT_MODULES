@@ -17,67 +17,94 @@
     <?= GridView::widget([
         'dataProvider' => $dataProviderArticulos,
         'columns' => [
-            'Articulos_id',
+            [
+                'attribute' => 'User_id',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Autor',
             'Autores',
             'Anio',
             'Titulo',
-            'Resumen',
-            // Agrega más columnas si es necesario
+
         ],
     ]) ?>
 
     <h2>Libros</h2>
-    <?= \yii\grid\GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProviderLibros,
         'columns' => [
-            'Libro_id',
+            [
+                'attribute' => 'User_id',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Autor',
             'Autores_sec',
             'Anio',
-            'Titulo',
-            'Resumen',
             // Agrega más columnas si es necesario
         ],
     ]) ?>
 
     <h2>Capítulos de Libros</h2>
-    <?= \yii\grid\GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProviderCapLibros,
         'columns' => [
-            'Cap_id',
-            'Autor_libro',
-            'Autores_capitulo',
+            [
+                'attribute' => 'User_id',
+                'value' => function ($model) {
+                    $profile = (new Query())
+                        ->select(['firstname', 'lastname'])
+                        ->from('profile')
+                        ->where(['user_id' => $model->User_id])
+                        ->one();
+
+                    return $profile ? $profile['firstname'] . ' ' . $profile['lastname'] : '';
+                },
+            ],
             'Anio',
             'Titulo_capitulo',
-            'Resumen',
+            'Paginas',
             // Agrega más columnas si es necesario
         ],
     ]) ?>
 
     <h2>Ponencias</h2>
-    <?= \yii\grid\GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProviderPonencias,
         'columns' => [
-            'Ponencia_id',
+            'Tipo',
+            'Participación',
             'Autor',
             'Anio',
-            'Titulo_ponencia',
-            'Resumen',
+            'Titulo_evento',
             // Agrega más columnas si es necesario
         ],
     ]) ?>
 
     <h2>Tesis</h2>
-    <?= \yii\grid\GridView::widget([
+    <?=GridView::widget([
         'dataProvider' => $dataProviderTesis,
         'columns' => [
-            'Tesis_id',
             'Autor',
             'Grado_academico',
             'Institucion_procedencia',
             'Anio',
-            'Titulo',
+            'Titulo',   
             // Agrega más columnas si es necesario
         ],
     ]) ?>
