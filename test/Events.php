@@ -66,7 +66,7 @@ class Events
     public static function onAdminMenuInit($event)
     {
         $event->sender->addItem([
-            'label' => 'Produción Cientifica',
+            'label' => 'Producción Científica',
             'url' => Url::to(['/test/admin']),
             'group' => 'manage',
             'icon' => '<i class="fa fa-book"></i>',
