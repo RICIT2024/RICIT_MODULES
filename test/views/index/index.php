@@ -2,171 +2,124 @@
 
 use humhub\widgets\Button;
 use humhub\widgets\GridView;
-use ricit\humhub\modules\test\models\SearchA;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
-// Register our module assets, this could also be done within the controller
-\ricit\humhub\modules\test\assets\Assets::register($this);
-
-$displayName = (Yii::$app->user->isGuest) ? Yii::t('TestModule.base', 'Guest') : Yii::$app->user->getIdentity()->displayName;
-$hum_uid=Yii::$app->user->getId();
-
-
-
+$this->title = 'Búsqueda de producción científica';
 ?>
 
-<div class="panel-heading"><strong>Producción Cientifica</strong> <?= Yii::t('TestModule.base', 'overview') ?></div>
-
-<div class="container-fluid">
-    <!--Capitulo de Libro-->
-    <h2 style="text-align:center;">LIBROS</h2>
-    <?= GridView::widget([
-        'dataProvider' => $combinedDataProvider['dataProvider1'],
-        'filterModel' => $combinedSearch['searchModel1'], // Assuming this is your search model
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-                    //'Cap_id',
-                    //'User_id',
-                    //'Titulo_libro',
-                    //'Autor_libro',
-                    'Anio',
-                    'Titulo_capitulo',
-                    'Paginas',
-                    'Autores_capitulo',
-                    'Resumen',
-                    //'Editores',
-                    //'ISBN',
-                    //'URL:url',
-                ],
-    ]); ?>
-
-    <br>
-
-    <!--Articulo-->
-    <?= GridView::widget([
-        'dataProvider' => $combinedDataProvider['dataProvider2'],
-        'filterModel' => $combinedSearch['searchModel2'], // Assuming this is your search model
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                //'Articulos_id',
-                //'User_id',
-                [
-                    'attribute' => 'Autor',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Autores',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Anio',
-                    'label' => 'Año',
-                    'headerOptions' => ['style' => 'text-align: center;  width:50px;'],
-                ],
-                [
-                    'attribute' => 'Titulo',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Resumen',
-                    'label' => 'Resumen',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                    //'Resumen',
-                    //'Revista',
-                    //'Pais',
-                    //'Idioma',
-                    //'ISSNs',
-                    //'URL:url',
-                    //'DOI',
-                    //'Palabras_clave',
-                // Add other columns with centered headers as needed
-                ],
-    ]); ?>
-
-    <br>
-
-    <!--Libro-->
-    <?= GridView::widget([
-        'dataProvider' => $combinedDataProvider['dataProvider3'],
-        'filterModel' => $combinedSearch['searchModel3'], // Assuming this is your search model
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                //'Articulos_id',
-                //'User_id',
-                [
-                    'attribute' => 'Autor',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Autores_sec',
-                    'label' => 'Autores Secundario',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Anio',
-                    'label' => 'Año',
-                    'headerOptions' => ['style' => 'text-align: center;  width:50px;'],
-                ],
-                [
-                    'attribute' => 'Titulo',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Resumen',
-                    'label' => 'Resumen',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                    //'Revista',
-                    //'Pais',
-                    //'Idioma',
-                    //'ISSNs',
-                    //'URL:url',
-                    //'DOI',
-                    //'Palabras_clave',
-                // Add other columns with centered headers as needed
-                ],
-    ]); ?>
-
-    <br>
-
-    <!--Ponencia-->
-    <?= GridView::widget([
-        'dataProvider' => $combinedDataProvider['dataProvider4'],
-        'filterModel' => $combinedSearch['searchModel4'], // Assuming this is your search model
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                [
-                    'attribute' => 'Tipo',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Autor',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Anio',
-                    'label' => 'Año',
-                    'headerOptions' => ['style' => 'text-align: center;  width:50px;'],
-                ],
-                [
-                    'attribute' => 'Titulo_Ponencia',
-                    'label' => 'Titulo',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                [
-                    'attribute' => 'Resumen',
-                    'headerOptions' => ['style' => 'text-align: center;'],
-                ],
-                    //'Resumen',
-                    //'Revista',
-                    //'Pais',
-                    //'Idioma',
-                    //'ISSNs',
-                    //'URL:url',
-                    //'DOI',
-                    //'Palabras_clave',
-                // Add other columns with centered headers as needed
-                ],
-    ]); ?>
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong><?= Html::encode($this->title) ?></strong>
+    </div>
+    <div class="panel-body">
+        <?php $form = ActiveForm::begin(['method' => 'get']); ?>
+        <div class="form-group">
+            <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'Ingrese términos de búsqueda'])->label('Buscar:') ?>
+            <?= Button::primary(Yii::t('base', 'Buscar'))->submit() ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>
+
+<?php if (isset($dataProviders)): ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Libros</strong>
+        </div>
+        <div class="panel-body"> 
+            <?= GridView::widget([
+                'dataProvider' => $dataProviders['libros'],
+                'columns' => [
+                    'Autor',
+                    'Titulo',
+                    'Anio',
+                    'Resumen',
+                    'Editorial',
+                    'ISBN',
+                    // Agrega más columnas según sea necesario
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Capítulos de Libros</strong>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviders['capLibros'],
+                'columns' => [
+                    'Autor_libro',
+                    'Titulo_capitulo',
+                    'Anio',
+                    'Resumen',
+                    'Editores',
+                    'ISBN',
+                    // Agrega más columnas según sea necesario
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Artículos</strong>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviders['articulos'],
+                'columns' => [
+                    'Autor',
+                    'Titulo',
+                    'Anio',
+                    'Resumen',
+                    'Revista',
+                    'Pais',
+                    // Agrega más columnas según sea necesario
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Ponencias</strong>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviders['ponencias'],
+                'columns' => [
+                    'Autor',
+                    'Titulo_ponencia',
+                    'Anio',
+                    'Resumen',
+                    'Titulo_evento',
+                    'País',
+                    // Agrega más columnas según sea necesario
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Tesis</strong>
+        </div>
+        <div class="panel-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProviders['tesis'],
+                'columns' => [
+                    'Autor',
+                    'Titulo',
+                    'Anio',
+                    'Resumen',
+                    'Grado_academico',
+                    'Institucion_procedencia',
+                    // Agrega más columnas según sea necesario
+                ],
+            ]) ?>
+        </div>
+    </div>
+<?php endif; ?>
