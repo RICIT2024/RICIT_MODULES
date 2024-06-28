@@ -42,7 +42,7 @@ class SearchM extends Model
 
         $librosQuery = (new Query())
             ->select('*')
-            ->from('Libros');
+            ->from('libros');
         $filterNull($librosQuery, 'Titulo', $term);
         $filterNull($librosQuery, 'Resumen', $term);
         $filterNull($librosQuery, 'Autor', $term);
@@ -72,7 +72,7 @@ class SearchM extends Model
 
         $tesisQuery = (new Query())
             ->select('*')
-            ->from('Tesis');
+            ->from('tesis');
         $filterNull($tesisQuery, 'Titulo', $term);
         $filterNull($tesisQuery, 'Autor', $term);
 
