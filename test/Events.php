@@ -17,7 +17,7 @@ class Events
     public static function onTopMenuInit($event)
     {
         $event->sender->addItem([
-            'label' => 'Producción Científica',
+            'label' => 'Motor de Búsqueda',
             'icon' => '<i class="fa fa-book"></i>',
             'url' => Url::to(['/test/index']),
             'sortOrder' => 99999,
