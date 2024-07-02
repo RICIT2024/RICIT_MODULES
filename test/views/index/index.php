@@ -5,121 +5,149 @@ use humhub\widgets\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Búsqueda de producción científica';
+$this->title = 'Motor de Búsqueda';
+
 ?>
 
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <strong><?= Html::encode($this->title) ?></strong>
+    <div class="panel-heading text-center">
+        <h1 class="panel-title"><?= Html::encode($this->title) ?></h1>
     </div>
     <div class="panel-body">
-        <?php $form = ActiveForm::begin(['method' => 'get']); ?>
-        <div class="form-group">
-            <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'Ingrese términos de búsqueda'])->label('Buscar:') ?>
-            <?= Button::primary(Yii::t('base', 'Buscar'))->submit() ?>
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <h3>Producción Científica</h3>
+                <?php $form = ActiveForm::begin(['method' => 'get']); ?>
+                <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'autor(es), título, palabras clave, resumen...', 'style' => 'text-transform: uppercase;', 'class' => 'form-control input-lg'])->label(false) ?>
+                <?= Html::hiddenInput('searchType', 'scientific') ?>
+                <?= Button::primary(Yii::t('base', 'Buscar'), ['class' => 'btn btn-primary'])->submit() ?>
+                <?php ActiveForm::end(); ?>
+            </div>
+            <div class="col-md-6 text-center">
+                <h3>Expertos</h3>
+                <?php $form = ActiveForm::begin(['method' => 'get']); ?>
+                <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'Nombre, Apellido, dependencia, sector, país...', 'style' => 'text-transform: uppercase;', 'class' => 'form-control input-lg'])->label(false) ?>
+                <?= Html::hiddenInput('searchType', 'experts') ?>
+                <?= Button::primary(Yii::t('base', 'Buscar'), ['class' => 'btn btn-primary'])->submit() ?>
+                <?php ActiveForm::end(); ?>
+            </div>
         </div>
-        <?php ActiveForm::end(); ?>
     </div>
 </div>
 
-<?php if (isset($dataProviders)): ?>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>Libros</strong>
+<?php if ($dataProviders): ?>
+    <?php if (isset($dataProviders['libros'])): ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Libros</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['libros'],
+                    'columns' => [
+                        ['attribute' => 'Autor', 'label' => 'Autor Principal'],
+                        ['attribute' => 'Autores_sec', 'label' => 'Autores Secundarios'],
+                        ['attribute' => 'Titulo', 'label' => 'Título'],
+                        ['attribute' => 'Resumen', 'label' => 'Resumen'],
+                        ['attribute' => 'Palabras_clave', 'label' => 'Palabras Clave'],
+                        ['attribute' => 'URL', 'label' => 'Enlace'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-        <div class="panel-body"> 
-            <?= GridView::widget([
-                'dataProvider' => $dataProviders['libros'],
-                'columns' => [
-                    'Autor',
-                    'Titulo',
-                    'Anio',
-                    'Resumen',
-                    'Editorial',
-                    'ISBN',
-                    // Agrega más columnas según sea necesario
-                ],
-            ]) ?>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Capítulos de Libros</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['capLibros'],
+                    'columns' => [
+                        ['attribute' => 'Autor_libro', 'label' => 'Autor del Libro'],
+                        ['attribute' => 'Titulo_libro', 'label' => 'Título del Libro'],
+                        ['attribute' => 'Autores_capitulo', 'label' => 'Autores del Capítulo'],
+                        ['attribute' => 'Titulo_capitulo', 'label' => 'Título del Capítulo'],
+                        ['attribute' => 'Resumen', 'label' => 'Resumen'],
+                        ['attribute' => 'Paginas', 'label' => 'Páginas'],
+                        ['attribute' => 'URL', 'label' => 'Enlace'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>Capítulos de Libros</strong>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Artículos</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['articulos'],
+                    'columns' => [
+                        ['attribute' => 'Autor', 'label' => 'Autor Principal'],
+                        ['attribute' => 'Autores', 'label' => 'Autores'],
+                        ['attribute' => 'Titulo', 'label' => 'Título'],
+                        ['attribute' => 'Resumen', 'label' => 'Resumen'],
+                        ['attribute' => 'Revista', 'label' => 'Revista'],
+                        ['attribute' => 'URL', 'label' => 'Enlace'],
+                        ['attribute' => 'Palabras_clave', 'label' => 'Palabras Clave'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-        <div class="panel-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProviders['capLibros'],
-                'columns' => [
-                    'Autor_libro',
-                    'Titulo_capitulo',
-                    'Anio',
-                    'Resumen',
-                    'Editores',
-                    'ISBN',
-                    // Agrega más columnas según sea necesario
-                ],
-            ]) ?>
-        </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>Artículos</strong>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Ponencias</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['ponencias'],
+                    'columns' => [
+                        ['attribute' => 'Autor', 'label' => 'Autor'],
+                        ['attribute' => 'Titulo_evento', 'label' => 'Título del Evento'],
+                        ['attribute' => 'Titulo_ponencia', 'label' => 'Título de la Ponencia'],
+                        ['attribute' => 'Tipo', 'label' => 'Tipo'],
+                        ['attribute' => 'Resumen', 'label' => 'Resumen'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-        <div class="panel-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProviders['articulos'],
-                'columns' => [
-                    'Autor',
-                    'Titulo',
-                    'Anio',
-                    'Resumen',
-                    'Revista',
-                    'Pais',
-                    // Agrega más columnas según sea necesario
-                ],
-            ]) ?>
-        </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>Ponencias</strong>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Tesis</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['tesis'],
+                    'columns' => [
+                        ['attribute' => 'Autor', 'label' => 'Autor'],
+                        ['attribute' => 'Titulo', 'label' => 'Título'],
+                        ['attribute' => 'Grado_academico', 'label' => 'Grado Académico'],
+                        ['attribute' => 'Institucion_procedencia', 'label' => 'Institución de Procedencia'],
+                        ['attribute' => 'Anio', 'label' => 'Año'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-        <div class="panel-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProviders['ponencias'],
-                'columns' => [
-                    'Autor',
-                    'Titulo_ponencia',
-                    'Anio',
-                    'Resumen',
-                    'Titulo_evento',
-                    'País',
-                    // Agrega más columnas según sea necesario
-                ],
-            ]) ?>
+    <?php elseif (isset($dataProviders['experts'])): ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Expertos</strong>
+            </div>
+            <div class="panel-body">
+                <?= GridView::widget([
+                    'dataProvider' => $dataProviders['experts'],
+                    'columns' => [
+                        ['attribute' => 'firstname', 'label' => 'Nombre'],
+                        ['attribute' => 'lastname', 'label' => 'Apellido'],
+                        ['attribute' => 'sector', 'label' => 'Sector'],
+                        ['attribute' => 'dependencia', 'label' => 'Dependencia'],
+                        ['attribute' => 'pais', 'label' => 'País'],
+                    ],
+                ]) ?>
+            </div>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>Tesis</strong>
-        </div>
-        <div class="panel-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProviders['tesis'],
-                'columns' => [
-                    'Autor',
-                    'Titulo',
-                    'Anio',
-                    'Resumen',
-                    'Grado_academico',
-                    'Institucion_procedencia',
-                    // Agrega más columnas según sea necesario
-                ],
-            ]) ?>
-        </div>
-    </div>
+    <?php endif; ?>
 <?php endif; ?>
