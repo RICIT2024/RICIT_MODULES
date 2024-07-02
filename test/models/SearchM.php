@@ -9,11 +9,13 @@ use yii\db\Query;
 class SearchM extends Model
 {
     public $term;
+    public $firstname;
+    public $lastname;
 
     public function rules()
     {
         return [
-            [['term'], 'safe'],
+            [['term', 'firstname', 'lastname'], 'safe'],
         ];
     }
 
@@ -44,8 +46,11 @@ class SearchM extends Model
             ->select('*')
             ->from('libros');
         $filterNull($librosQuery, 'Titulo', $term);
+        $filterNull($librosQuery, 'Autores_sec', $term);
         $filterNull($librosQuery, 'Resumen', $term);
         $filterNull($librosQuery, 'Autor', $term);
+        $filterNull($librosQuery, 'Palabras_clave', $term);
+
 
         $capLibrosQuery = (new Query())
             ->select('*')
@@ -54,14 +59,19 @@ class SearchM extends Model
         $filterNull($capLibrosQuery, 'Resumen', $term);
         $filterNull($capLibrosQuery, 'Autor_libro', $term);
         $filterNull($capLibrosQuery, 'Autores_capitulo', $term);
+        $filterNull($capLibrosQuery, 'Titulo_libro', $term);
+        $filterNull($capLibrosQuery, 'Paginas', $term);
 
         $articulosQuery = (new Query())
             ->select('*')
             ->from('articulos');
         $filterNull($articulosQuery, 'Titulo', $term);
         $filterNull($articulosQuery, 'Resumen', $term);
+        $filterNull($articulosQuery, 'Revista', $term);
         $filterNull($articulosQuery, 'Autor', $term);
         $filterNull($articulosQuery, 'Autores', $term);
+        $filterNull($articulosQuery, 'Palabras_clave', $term);
+
 
         $ponenciasQuery = (new Query())
             ->select('*')
@@ -69,12 +79,17 @@ class SearchM extends Model
         $filterNull($ponenciasQuery, 'Titulo_ponencia', $term);
         $filterNull($ponenciasQuery, 'Resumen', $term);
         $filterNull($ponenciasQuery, 'Autor', $term);
+        $filterNull($ponenciasQuery, 'Titulo_evento', $term);
+        $filterNull($ponenciasQuery, 'Tipo', $term);
+
 
         $tesisQuery = (new Query())
             ->select('*')
             ->from('tesis');
         $filterNull($tesisQuery, 'Titulo', $term);
         $filterNull($tesisQuery, 'Autor', $term);
+        $filterNull($tesisQuery, 'Grado_academico', $term);
+        $filterNull($tesisQuery, 'Institucion_procedencia', $term);
 
         return [
             'libros' => new ActiveDataProvider(['query' => $librosQuery]),
@@ -82,6 +97,50 @@ class SearchM extends Model
             'articulos' => new ActiveDataProvider(['query' => $articulosQuery]),
             'ponencias' => new ActiveDataProvider(['query' => $ponenciasQuery]),
             'tesis' => new ActiveDataProvider(['query' => $tesisQuery]),
+        ];
+    }
+
+    public function searchExperts($params)
+    {
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return [
+                'experts' => null,
+            ];
+        }
+
+        $term = $this->term;
+        $firstname = $this->firstname;
+        $lastname = $this->lastname;
+
+        // Query principal para trayectoria
+        $expertsQuery = (new Query())
+            ->select(['trayectoria.*', 'profile.firstname', 'profile.lastname'])
+            ->from('trayectoria')
+            ->leftJoin('profile', 'trayectoria.user_id = profile.user_id');
+
+        // Aplicar filtros
+        $filterNull = function ($query, $column, $value) {
+            if (!empty($value)) {
+                $query->orWhere(['like', $column, $value]);
+            }
+        };
+
+        $expertsQuery->andWhere([
+            'or',
+            ['like', 'profile.firstname', $term],
+            ['like', 'profile.lastname', $term],
+            ['like', 'trayectoria.sector', $term],
+            ['like', 'trayectoria.dependencia', $term],
+            ['like', 'trayectoria.pais', $term],
+            ['like', 'trayectoria.estado', $term],
+            ['like', 'trayectoria.cargo', $term],
+            ['like', 'trayectoria.periodo', $term],
+        ]);
+
+        return [
+            'experts' => new ActiveDataProvider(['query' => $expertsQuery]),
         ];
     }
 }
