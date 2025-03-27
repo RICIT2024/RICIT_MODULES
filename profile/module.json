@@ -1,0 +1,12 @@
+{
+    "id": "profile",
+    "name": "Profile",
+    "description": "Visualización y descarga de datos del perfil",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2"
+    },
+    "screenshots": ["assets/screen1.jpg"]
+}
