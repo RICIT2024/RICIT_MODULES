@@ -19,44 +19,45 @@ class AdminController extends Controller
      */
     
      public function actionIndex()
-     {
-         //obtiene el identificador del contenedor, en este caso seria el contenedor del perfil de usuario
-         $model = new ScientificProduction();
-         $provider = new ActiveDataProvider([
-             'query' => ScientificProduction::find()
-                 ->select([
-                    'scientific_production.P_id',
-                    'COALESCE(libros.Autor, cap_libros.Autores_capitulo, articulos.Autor, ponencias.Autor) AS Autor',
-                    'COALESCE(libros.Anio, cap_libros.Anio, articulos.Anio, ponencias.Anio) AS Anio',
-                    'COALESCE(libros.Titulo, cap_libros.Titulo_capitulo, articulos.Titulo, ponencias.Titulo_ponencia) AS Titulo',
-                    'COALESCE(libros.Resumen, cap_libros.Resumen, articulos.Resumen, ponencias.Resumen) AS Resumen',
-                    'scientific_production.Tipo'
-                 ])
-                 ->leftJoin('libros', 'scientific_production.P_id = libros.Libro_id')
-                 ->leftJoin('cap_libros', 'scientific_production.P_id = cap_libros.Cap_id')
-                 ->leftJoin('articulos', 'scientific_production.P_id = articulos.Articulos_id')
-                 ->leftJoin('ponencias', 'scientific_production.P_id = ponencias.Ponencia_id'),
-             'pagination' => [
-                 'pageSize' => 10, // Adjust page size as needed
-             ],
-             'sort' => [
-                 'attributes' => [
-                     'P_id',
-                     'Autor',
-                     'Anio',
-                     'Titulo',
-                     'Resumen',
-                     'Tipo'
-                 ],
-             ],
-         ]);
- 
-         // returns an array of Post objects
-         return $this->render('index', [
-             'dataProvider' => $provider,
-            'model' => $model,
-          ]);
-     }
+{
+    $model = new ScientificProduction();
+    
+    // Proveedor de datos para la producción científica
+    $dataProvider = new ActiveDataProvider([
+        'query' => ScientificProduction::find()
+            ->select([
+                'scientific_production.P_id',
+                'COALESCE(libros.Autor, cap_libros.Autores_capitulo, articulos.Autor, ponencias.Autor, tesis.Autor) AS Autor',
+                'COALESCE(libros.Anio, cap_libros.Anio, articulos.Anio, ponencias.Anio, tesis.Anio) AS Anio',
+                'COALESCE(libros.Titulo, cap_libros.Titulo_capitulo, articulos.Titulo, ponencias.Titulo_ponencia, tesis.Titulo) AS Titulo',
+                'COALESCE(libros.Resumen, cap_libros.Resumen, articulos.Resumen, ponencias.Resumen) AS Resumen',
+                'scientific_production.Tipo'
+            ])
+            ->leftJoin('libros', 'scientific_production.P_id = libros.Libro_id')
+            ->leftJoin('cap_libros', 'scientific_production.P_id = cap_libros.Cap_id')
+            ->leftJoin('articulos', 'scientific_production.P_id = articulos.Articulos_id')
+            ->leftJoin('ponencias', 'scientific_production.P_id = ponencias.Ponencia_id')
+            ->leftJoin('tesis', 'scientific_production.P_id = tesis.Tesis_id'),
+        'pagination' => [
+            'pageSize' => 10,
+        ],
+        'sort' => [
+            'attributes' => ['P_id', 'Autor', 'Anio', 'Titulo', 'Resumen', 'Tipo'],
+        ],
+    ]);
+
+    // Proveedor de datos específico para artículos (si se necesita)
+    $dataProviderArticulos = new ActiveDataProvider([
+        'query' => \ricit\humhub\modules\test\models\Articulos::find(),
+        'pagination' => ['pageSize' => 10],
+    ]);
+
+    return $this->render('index', [
+        'dataProvider' => $dataProvider,
+        'dataProviderArticulos' => $dataProviderArticulos, // Se envía la variable esperada
+        'model' => $model,
+    ]);
+}
 
 }
 
