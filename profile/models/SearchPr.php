@@ -67,26 +67,10 @@ class SearchPr extends Profile
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'street', $this->street])
-            ->andFilterWhere(['like', 'zip', $this->zip])
-            ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'state', $this->state])
-            ->andFilterWhere(['like', 'about', $this->about])
-            ->andFilterWhere(['like', 'phone_private', $this->phone_private])
-            ->andFilterWhere(['like', 'phone_work', $this->phone_work])
-            ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'fax', $this->fax])
-            ->andFilterWhere(['like', 'im_xmpp', $this->im_xmpp])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'url_facebook', $this->url_facebook])
-            ->andFilterWhere(['like', 'url_linkedin', $this->url_linkedin])
-            ->andFilterWhere(['like', 'url_instagram', $this->url_instagram])
-            ->andFilterWhere(['like', 'url_xing', $this->url_xing])
-            ->andFilterWhere(['like', 'url_youtube', $this->url_youtube])
-            ->andFilterWhere(['like', 'url_vimeo', $this->url_vimeo])
-            ->andFilterWhere(['like', 'url_tiktok', $this->url_tiktok])
-            ->andFilterWhere(['like', 'url_twitter', $this->url_twitter]);
+            ->andFilterWhere(['like', 'entidad', $this->entidad])
+            ->andFilterWhere(['like', 'municipio', $this->municipio])
+            ->andFilterWhere(['like', 'ranogaga', $this->rangoga]);
 
         return $dataProvider;
     }
@@ -114,31 +98,16 @@ class SearchPr extends Profile
         
         ]);
 
+        
+
         $query->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'gender', $this->gender])
-            ->andFilterWhere(['like', 'street', $this->street])
-            ->andFilterWhere(['like', 'zip', $this->zip])
-            ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'state', $this->state])
-            ->andFilterWhere(['like', 'about', $this->about])
-            ->andFilterWhere(['like', 'phone_private', $this->phone_private])
-            ->andFilterWhere(['like', 'phone_work', $this->phone_work])
-            ->andFilterWhere(['like', 'mobile', $this->mobile])
-            ->andFilterWhere(['like', 'fax', $this->fax])
-            ->andFilterWhere(['like', 'im_xmpp', $this->im_xmpp])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'url_facebook', $this->url_facebook])
-            ->andFilterWhere(['like', 'url_linkedin', $this->url_linkedin])
-            ->andFilterWhere(['like', 'url_instagram', $this->url_instagram])
-            ->andFilterWhere(['like', 'url_xing', $this->url_xing])
-            ->andFilterWhere(['like', 'url_youtube', $this->url_youtube])
-            ->andFilterWhere(['like', 'url_vimeo', $this->url_vimeo])
-            ->andFilterWhere(['like', 'url_tiktok', $this->url_tiktok])
-            ->andFilterWhere(['like', 'url_twitter', $this->url_twitter]);
-
+            ->andFilterWhere(['like', 'entidad', $this->entidad])
+            ->andFilterWhere(['like', 'municipio', $this->municipio])
+            ->andFilterWhere(['like', 'ranogaga', $this->rangoga]);
         return $dataProvider;
     }
 
