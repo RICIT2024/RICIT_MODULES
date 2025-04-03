@@ -104,21 +104,25 @@ class SearchM extends Model
     {
         $this->load($params);
 
-        if (!$this->validate()) {
-            return [
-                'experts' => null,
-            ];
-        }
+        // Función para filtrar y eliminar valores null
+        $filterNull = function ($query, $column, $value) {
+            if (!empty($value)) {
+                $query->orWhere(['like', $column, $value]);
+            }
+        };
 
         $term = $this->term;
         $firstname = $this->firstname;
         $lastname = $this->lastname;
 
         // Query principal para trayectoria
-        $expertsQuery = (new Query())
-            ->select(['trayectoria.*', 'profile.firstname', 'profile.lastname'])
-            ->from('trayectoria')
-            ->leftJoin('profile', 'trayectoria.user_id = profile.user_id');
+        $expertsQuery = (new Query())    
+        ->select('*')
+        ->from('profile');
+    $filterNull($expertsQuery, 'firstname', $term);
+    $filterNull($expertsQuery, 'lastname', $term);
+    $filterNull($expertsQuery, 'aboutme', $term);
+    $filterNull($expertsQuery, 'correocont', $term);
 
         // Aplicar filtros
         $filterNull = function ($query, $column, $value) {
@@ -127,17 +131,7 @@ class SearchM extends Model
             }
         };
 
-        $expertsQuery->andWhere([
-            'or',
-            ['like', 'profile.firstname', $term],
-            ['like', 'profile.lastname', $term],
-            ['like', 'trayectoria.sector', $term],
-            ['like', 'trayectoria.dependencia', $term],
-            ['like', 'trayectoria.pais', $term],
-            ['like', 'trayectoria.estado', $term],
-            ['like', 'trayectoria.cargo', $term],
-            ['like', 'trayectoria.periodo', $term],
-        ]);
+        
 
         return [
             'experts' => new ActiveDataProvider(['query' => $expertsQuery]),
