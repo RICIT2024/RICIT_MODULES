@@ -5,28 +5,42 @@ use humhub\widgets\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Motor de Búsqueda';
+$this->title = 'Materiales diversos sobre el conocimiento turístico.';
 
 ?>
+<head>
+<title><?= Html::encode($this->title) ?></title>
 
+</head>
 <div class="panel panel-default">
     <div class="panel-heading text-center">
-        <h1 class="panel-title"><?= Html::encode($this->title) ?></h1>
+        <h2><?= Html::encode($this->title) ?> <br>¡Encuéntralos aquí! </h2><br>
+        <p>Encuentra libros, artículos, ponenecias y tesis que abordan el turismo desde diversas perspectivas. 
+            Esta sección está diseñada para estudiantes y profesionales que buscan ampliar su conocimiento. Accede a recursos actualizados
+            y de facil consulta para fortalecer tu aprendizaje.
+        </p>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6 text-center">
-                <h3>Producción Científica</h3>
+                <h3>Materiales académicos y científicos sobre el turismo<br>¡Encuéntralos aquí!</h3>
+                <p>Accede a estudios e investigaciones sobre turismo  con rigor académico. Encuentra información científica, metodológica y actualizada.
+                    Profundiza en diversos temas según los enfoques de cada autor.
+                </p>
                 <?php $form = ActiveForm::begin(['method' => 'get']); ?>
-                <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'autor(es), título, palabras clave, resumen...', 'style' => 'text-transform: uppercase;', 'class' => 'form-control input-lg'])->label(false) ?>
+                <?= $form->field($searchModel, 'term')->textInput([
+                    'placeholder' => 'Autor(es), título, palabras clave, resumen...', 
+                    'style' => 'border: 2px solid #611232;', 
+                    'class' => 'form-control input-lg'])->label(false) ?>
                 <?= Html::hiddenInput('searchType', 'scientific') ?>
                 <?= Button::primary(Yii::t('base', 'Buscar'), ['class' => 'btn btn-primary'])->submit() ?>
                 <?php ActiveForm::end(); ?>
             </div>
             <div class="col-md-6 text-center">
-                <h3>Expertos</h3>
+                <h3>Acércate a los expertos<br>¡Encuéntralos aquí! </h3>
+                <p>Explora los estudios de expertos en turismo, aprende de sus aportaciones y conecta con profesionales del sector para generar nuevas sinergias.</p> <br>
                 <?php $form = ActiveForm::begin(['method' => 'get']); ?>
-                <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'Nombre, Apellido, dependencia, sector, país...', 'style' => 'text-transform: uppercase;', 'class' => 'form-control input-lg'])->label(false) ?>
+                <?= $form->field($searchModel, 'term')->textInput(['placeholder' => 'Datos personales, áreas de especialidad, correo electrónico...', 'style' => 'border: 2px solid #611232;', 'class' => 'form-control input-lg'])->label(false) ?>
                 <?= Html::hiddenInput('searchType', 'experts') ?>
                 <?= Button::primary(Yii::t('base', 'Buscar'), ['class' => 'btn btn-primary'])->submit() ?>
                 <?php ActiveForm::end(); ?>
@@ -134,7 +148,7 @@ $this->title = 'Motor de Búsqueda';
     <?php elseif (isset($dataProviders['experts'])): ?>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Expertos</strong>
+                <strong>Acércate a los expertos</strong>
             </div>
             <div class="panel-body">
                 <?= GridView::widget([
@@ -142,9 +156,8 @@ $this->title = 'Motor de Búsqueda';
                     'columns' => [
                         ['attribute' => 'firstname', 'label' => 'Nombre'],
                         ['attribute' => 'lastname', 'label' => 'Apellido'],
-                        ['attribute' => 'sector', 'label' => 'Sector'],
-                        ['attribute' => 'dependencia', 'label' => 'Dependencia'],
-                        ['attribute' => 'pais', 'label' => 'País'],
+                        ['attribute' => 'aboutme', 'label' => 'Áreas de especialización'],
+                        ['attribute' => 'correocont', 'label' => 'Correo electrónico'],
                     ],
                 ]) ?>
             </div>
