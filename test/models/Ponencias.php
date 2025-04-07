@@ -53,72 +53,59 @@ class Ponencias extends ActiveRecord
              'Seminario' => 'Seminario',
              'Panel' => 'Panel',
              'Otro' => 'Otro',
-             // Add more options as needed
          ];
      }
 
-
-     // Define un metodo para retornar las opciones para Tipo
-     public function getTotal()
+     // Métodos para retornar total de ponencias por tipo
+     public static function getTotalCongreso()
     {
-        return $this->find()->count();
-    }
-    
-     // Define un metodo para retornar total de congresos
-     public function getTotalCongreso()
-    {
-        return $this->find()->where(['Tipo'=>'Congreso'])->count();
+        return self::find()->where(['Tipo'=>'Congreso'])->count();
     }
 
-     // Define un metodo para retornar total de Simposio
-     public function getTotalSimposio()
+    public static function getTotalSimposio()
     {
-        return $this->find()->where(['Tipo'=>'Simposio'])->count();
-    }
-     // Define un metodo para retornar total de congresos
-     public function getTotalForo()
-    {
-        return $this->find()->where(['Tipo'=>'Foro'])->count();
+        return self::find()->where(['Tipo'=>'Simposio'])->count();
     }
 
-     // Define un metodo para retornar total de congresos
-     public function getTotalSeminario()
+    public static function getTotalForo()
     {
-        return $this->find()->where(['Tipo'=>'Seminario'])->count();
+        return self::find()->where(['Tipo'=>'Foro'])->count();
     }
 
-     // Define un metodo para retornar total de congresos
-     public function getTotalOtro()
+    public static function getTotalSeminario()
     {
-        return $this->find()->where(['Tipo'=>'Otro'])->count();
+        return self::find()->where(['Tipo'=>'Seminario'])->count();
     }
 
-     // Define un metodo para retornar total de congresos
-     public function getTotalPanel()
+    public static function getTotalOtro()
     {
-        return $this->find()->where(['Tipo'=>'Panel'])->count();
+        return self::find()->where(['Tipo'=>'Otro'])->count();
     }
-     // Define un metodo para retornar las opciones para Tipo
+
+    public static function getTotalPanel()
+    {
+        return self::find()->where(['Tipo'=>'Panel'])->count();
+    }
+
+     // Define un metodo para retornar las opciones para Memoria
      public static function getMemoriaOptions()
      {
          return [
              'Si' => 'Si',
              'No' => 'No',
-             // Add more options as needed
          ];
      }
 
-      // Define un metodo para retornar las opciones para Tipo
-      public static function getParticipacionOptions()
-      {
-          return [
-              'Conferencia Magistral' => 'Conferencia Magistral',
-              'Ponencia' => 'Ponencia',
-              // Add more options as needed
-          ];
-      }
+     // Define un metodo para retornar las opciones para Participación
+     public static function getParticipacionOptions()
+     {
+         return [
+             'Conferencia Magistral' => 'Conferencia Magistral',
+             'Ponencia' => 'Ponencia',
+         ];
+     }
 
-    // Define relacion inversa con scientific_production table
+    // Relación con la tabla scientific_production
     public function getScientificProductions()
     {
         return $this->hasMany(ScientificProduction::class, ['P_id' => 'Ponencia_id']);
@@ -145,7 +132,7 @@ class Ponencias extends ActiveRecord
         ];
     }
 
-       /**
+    /**
      * Convierte ciertos atributos a mayúsculas antes de guardar.
      */
     public function beforeSave($insert)
