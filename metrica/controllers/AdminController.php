@@ -32,10 +32,11 @@ class AdminController extends Controller
             if ($valor === 'CANDIDATO') {
                 $sniResumen['CANDIDATO'] = (int) $row['total'];
             } elseif (in_array($valor, ['SNI_I', 'SNI_II', 'SNI_III'])) {
-                $sniResumen['Con SNI'] = (int) $row['total'];
+                $sniResumen['Con SNI'] += (int) $row['total']; // ← SUMA en lugar de sobrescribir
                 $nivelesSNI[$valor] = (int) $row['total'];
             }
         }
+        
 
         // Obtener datos para el gráfico de entidades
         $entidadData = metrica::find()
