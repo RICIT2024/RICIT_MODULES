@@ -1,5 +1,9 @@
 <?php
+$this->title = 'Demografía RICIT';
+
 use yii\helpers\Json;
+
+
 
 $this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js');
 
@@ -101,3 +105,6 @@ $this->registerJs($chartScript);
         </div>
     </div>
 </div>
+<?php
+$this->registerJs("document.title = 'Demografía RICIT';");
+?>
