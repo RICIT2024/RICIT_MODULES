@@ -36,7 +36,6 @@ class AdminController extends Controller
                 $nivelesSNI[$valor] = (int) $row['total'];
             }
         }
-        
 
         // Obtener datos para el gráfico de entidades
         $entidadData = metrica::find()
@@ -45,8 +44,16 @@ class AdminController extends Controller
             ->asArray()
             ->all();
 
-        // Convertir los datos de entidad en formato JSON para usarlos en el mapa
+        // Obtener los municipios por entidad
+        $municipioData = metrica::find()
+            ->select(['entidad', 'municipio', 'COUNT(*) as cantidad'])
+            ->groupBy(['entidad', 'municipio'])
+            ->asArray()
+            ->all();
+
+        // Convertir los datos en formato JSON para usarlos en el mapa
         $entidadDataJson = Json::encode($entidadData);
+        $municipioDataJson = Json::encode($municipioData);
 
         // Pasar los datos a la vista
         return $this->render('index', [
@@ -54,6 +61,7 @@ class AdminController extends Controller
             'sniResumen' => $sniResumen,
             'nivelesSNI' => $nivelesSNI,
             'entidadData' => $entidadDataJson,
+            'municipioData' => $municipioDataJson,
         ]);
     }
 }
