@@ -1,6 +1,8 @@
 <?php 
 use yii\helpers\Json;
 
+$this->title = 'Demografía RICIT'; // ✅ Título de la pestaña
+
 $this->registerJsFile('https://cdn.jsdelivr.net/npm/chart.js');
 $this->registerJsFile('https://unpkg.com/leaflet@1.7.1/dist/leaflet.js');
 
@@ -33,7 +35,8 @@ new Chart(document.getElementById('graficoRangoga'), {
         }]
     },
     options: {
-        responsive: true,
+        responsive: false,
+        maintainAspectRatio: false,
         plugins: {
             legend: { position: 'bottom' }
         }
@@ -50,7 +53,8 @@ new Chart(document.getElementById('graficoSniResumen'), {
         }]
     },
     options: {
-        responsive: true,
+        responsive: false,
+        maintainAspectRatio: false,
         plugins: {
             legend: { position: 'bottom' }
         }
@@ -67,7 +71,8 @@ new Chart(document.getElementById('graficoNiveles'), {
         }]
     },
     options: {
-        responsive: true,
+        responsive: false,
+        maintainAspectRatio: false,
         plugins: {
             legend: { position: 'bottom' }
         }
@@ -115,7 +120,7 @@ const coordenadasEntidades = {
 const map = L.map('map').setView([23.6345, -102.5528], 5);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
 entidadData.forEach(function (entidad) {
@@ -130,10 +135,13 @@ entidadData.forEach(function (entidad) {
             return municipio.entidad === entidad.entidad;
         });
 
-        municipios.forEach(function (municipio) {
-            L.marker(coords).addTo(map)
-                .bindPopup(municipio.municipio + ': ' + municipio.cantidad + ' investigadores');
+        let contenido = '<b>' + entidad.entidad + '</b><br><ul>';
+        municipios.forEach(function (m) {
+            contenido += '<li>' + m.municipio + ': ' + m.cantidad + '</li>';
         });
+        contenido += '</ul>';
+
+        marker.bindPopup(contenido).openPopup();
     });
 });
 JS;
@@ -145,6 +153,7 @@ $this->registerJs($chartScript);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title><?= $this->title ?></title> <!-- ✅ Usando el título de Yii -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://framework-gb.cdn.gob.mx/fonts/patria.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
@@ -196,21 +205,21 @@ $this->registerJs($chartScript);
         <hr class="red">
         <p>Conoce cómo se distribuyen los investigadores por rangos de edad.</p>
         <div style="display: flex; justify-content: center;">
-            <canvas id="graficoRangoga" width="400" height="400"></canvas>
+            <canvas id="graficoRangoga" style="width: 350px !important; height: 350px !important;"></canvas> <!-- ✅ Más pequeño -->
         </div>
 
         <h1>Comunidad SNI</h1>
         <hr class="red">
         <p>Descubre cuántos integrantes forman parte del Sistema Nacional de Investigadores (SNI).</p>
         <div style="display: flex; justify-content: center;">
-            <canvas id="graficoSniResumen" width="400" height="400"></canvas>
+            <canvas id="graficoSniResumen" style="width: 350px !important; height: 350px !important;"></canvas> <!-- ✅ Más pequeño -->
         </div>
 
         <h1>Nivel de SNI</h1>
         <hr class="red">
         <p>Explora cómo se distribuyen los integrantes de la comunidad en los distintos niveles del SNI.</p>
         <div style="display: flex; justify-content: center;">
-            <canvas id="graficoNiveles" width="400" height="400"></canvas>
+            <canvas id="graficoNiveles" style="width: 350px !important; height: 350px !important;"></canvas> 
         </div>
     </div>
 </body>
