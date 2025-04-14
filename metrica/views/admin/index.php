@@ -153,7 +153,7 @@ $this->registerJs($chartScript);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?= $this->title ?></title> <!-- ✅ Usando el título de Yii -->
+    <title><?= $this->title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://framework-gb.cdn.gob.mx/fonts/patria.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
@@ -205,14 +205,14 @@ $this->registerJs($chartScript);
         <hr class="red">
         <p>Conoce cómo se distribuyen los investigadores por rangos de edad.</p>
         <div style="display: flex; justify-content: center;">
-            <canvas id="graficoRangoga" style="width: 350px !important; height: 350px !important;"></canvas> <!-- ✅ Más pequeño -->
+            <canvas id="graficoRangoga" style="width: 350px !important; height: 350px !important;"></canvas> 
         </div>
 
         <h1>Comunidad SNI</h1>
         <hr class="red">
         <p>Descubre cuántos integrantes forman parte del Sistema Nacional de Investigadores (SNI).</p>
         <div style="display: flex; justify-content: center;">
-            <canvas id="graficoSniResumen" style="width: 350px !important; height: 350px !important;"></canvas> <!-- ✅ Más pequeño -->
+            <canvas id="graficoSniResumen" style="width: 350px !important; height: 350px !important;"></canvas>
         </div>
 
         <h1>Nivel de SNI</h1>
